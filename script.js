@@ -57,8 +57,14 @@ $(document).ready(function() {
         callAPI(cityInput);
         cityEl = $("<a>");
         cityEl.text(cityInput);
-        cityEl.attr("class","list-group-item list-group-item-action");
+        cityEl.attr("class","list-group-item list-group-item-action cities");
+        cityEl.attr("id","wrapper")
         $(".cityList").prepend(cityEl);
+    })
+
+    $(document.body).on("click", "a", function(){
+        cityClick = $(this).text();
+        callAPI(cityClick);
     })
 
     callAPI("New York")  
