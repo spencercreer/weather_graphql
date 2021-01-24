@@ -8,7 +8,7 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
   <body>
     <div class="jumbotron mt-2 p-0">
@@ -17,27 +17,29 @@
             <div class="col-3 float-left px-3">
                 <aside>
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="City" aria-label="City" aria-describedby="basic-addon2">
+                        <input type="text" class="form-control city-input" placeholder="City" aria-label="City" aria-describedby="basic-addon2">
                         <div class="input-group-append">
-                          <button class="btn btn-primary" type="button">Search</button>
+                          <button class="btn btn-primary searchBtn" type="button">Search</button>
                         </div>
                       </div>
-                      <div class="list-group">
-                        <a href="#" class="list-group-item list-group-item-action">Chicago</a>
-                        <a href="#" class="list-group-item list-group-item-action">Phoenix</a>
-                        <a href="#" class="list-group-item list-group-item-action">Dallas</a>
-                        <a href="#" class="list-group-item list-group-item-action">Sacramento</a>
+                      <div class="list-group cityList">
+                        <a class="list-group-item list-group-item-action">New York</a>
+                        <a class="list-group-item list-group-item-action">Chicago</a>
+                        <a class="list-group-item list-group-item-action">Dallas</a>
+                        <a class="list-group-item list-group-item-action">Los Angeles</a>
                       </div>
                 </aside>
             </div>
             <div class="row col-9">
+              <h4>Today's Forecast</h4>
                 <div class="card col-12">
                     <div class="card-body">
-                      <h2>Atlanta 1/21/2021</h2>
-                      <p>Temperature:</p>
-                      <p>Humidity:</p>
-                      <p>Wind Speed:</p>
-                      <p>UV Index:</p>
+                      <h2 class="city"></h2>
+                      <p class="description"></p>
+                      <p class="tempF"></p>
+                      <p class="humidity"></p>
+                      <p class="wind"></p>
+                      <p class="uvIndex"></p>
                     </div>
                   </div>
                 <div class="col-12 px-0">
@@ -47,40 +49,45 @@
                             <div class="card-header"><h5>1/22/2021</h5></div>
                             <div class="card-body">
                               <h5 class="card-title"></h5>
-                              <p class="card-text">Temperature</p>
-                              <p class="card-text">Humidity</p>
+                              <p class="card-text maxDay1"></p>
+                              <p class="card-text minDay1"></p>
+                              <p class="card-text humDay1"></p>
                             </div>
                           </div>
                           <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
                             <div class="card-header"><h5>1/23/2021</h5></div>
                             <div class="card-body">
                               <h5 class="card-title"></h5>
-                              <p class="card-text">Temperature</p>
-                              <p class="card-text">Humidity</p>
+                              <p class="card-text maxDay2"></p>
+                              <p class="card-text minDay2"></p>
+                              <p class="card-text humDay2"></p>
                             </div>
                           </div>
                           <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
                             <div class="card-header"><h5>1/24/2021</h5></div>
                             <div class="card-body">
                               <h5 class="card-title"></h5>
-                              <p class="card-text">Temperature</p>
-                              <p class="card-text">Humidity</p>
+                              <p class="card-text maxDay3"></p>
+                              <p class="card-text minDay3"></p>
+                              <p class="card-text humDay3"></p>
                             </div>
                           </div>
                           <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
                             <div class="card-header"><h5>1/25/2021</h5></div>
                             <div class="card-body">
                               <h5 class="card-title"></h5>
-                              <p class="card-text">Temperature</p>
-                              <p class="card-text">Humidity</p>
+                              <p class="card-text maxDay4"></p>
+                              <p class="card-text minDay4"></p>
+                              <p class="card-text humDay4"></p>
                             </div>
                           </div>
                           <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
                             <div class="card-header"><h5>1/26/2021</h5></div>
                             <div class="card-body">
                               <h5 class="card-title"></h5>
-                              <p class="card-text">Temperature</p>
-                              <p class="card-text">Humidity</p>
+                              <p class="card-text maxDay5"></p>
+                              <p class="card-text minDay5"></p>
+                              <p class="card-text humDay5"></p>
                             </div>
                           </div>
                         </div>
@@ -92,7 +99,8 @@
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="script.js"></script>
   </body>
 </html>
