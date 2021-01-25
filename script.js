@@ -1,4 +1,20 @@
 $(document).ready(function() {
+    var weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    let dt = new Date();
+    
+    $(".currentDate").text(`${dt.getMonth() + 1} / ${dt.getDate()} / ${dt.getFullYear()}`);
+    $(".wday1").text(weekdays[dt.getDay()+1]);
+    $(".day1").text(`${dt.getMonth() + 1} / ${dt.getDate() + 1} / ${dt.getFullYear()}`);
+    $(".wday2").text(weekdays[dt.getDay()+2]);
+    $(".day2").text(`${dt.getMonth() + 1} / ${dt.getDate() + 2} / ${dt.getFullYear()}`);
+    $(".wday3").text(weekdays[dt.getDay()+3]);
+    $(".day3").text(`${dt.getMonth() + 1} / ${dt.getDate() + 3} / ${dt.getFullYear()}`);
+    $(".wday4").text(weekdays[dt.getDay()+4]);
+    $(".day4").text(`${dt.getMonth() + 1} / ${dt.getDate() + 4} / ${dt.getFullYear()}`);
+    $(".wday5").text(weekdays[dt.getDay()+5]);
+    $(".day5").text(`${dt.getMonth() + 1} / ${dt.getDate() + 5} / ${dt.getFullYear()}`);
+
+
     function convertTemp(tempK){
         //Convert temp Kelvin to Fahrenheit
         let tempF = (tempK - 273.15) * 1.80 + 32;
@@ -44,8 +60,8 @@ $(document).ready(function() {
                for (let i = 1; i < 6; i++) {
                    let maxTemp = convertTemp(response2.daily[i].temp.max);
                    let minTemp = convertTemp(response2.daily[i].temp.min);
-                   $(".maxDay" + i).text("Temperature High: " + maxTemp.toFixed(2) + String.fromCharCode(176) + " F");
-                   $(".minDay" + i).text("Temperature Low: " + minTemp.toFixed(2) + String.fromCharCode(176) + " F");
+                   $(".maxDay" + i).text("High: " + maxTemp.toFixed(2) + String.fromCharCode(176) + " F");
+                   $(".minDay" + i).text("Low: " + minTemp.toFixed(2) + String.fromCharCode(176) + " F");
                    $(".humDay" + i).text("Humidity: " + response2.daily[i].humidity + "%");
                 }
                });
@@ -57,8 +73,7 @@ $(document).ready(function() {
         callAPI(cityInput);
         cityEl = $("<a>");
         cityEl.text(cityInput);
-        cityEl.attr("class","list-group-item list-group-item-action cities");
-        cityEl.attr("id","wrapper")
+        cityEl.attr("class","list-group-item list-group-item-action");
         $(".cityList").prepend(cityEl);
     })
 
@@ -67,5 +82,5 @@ $(document).ready(function() {
         callAPI(cityClick);
     })
 
-    callAPI("New York")  
+    callAPI("New York");
 })
