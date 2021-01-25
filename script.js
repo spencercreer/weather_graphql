@@ -2,7 +2,6 @@ $(document).ready(function() {
     var weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     let dt = new Date();
     
-    $(".currentDate").text(`${dt.getMonth() + 1} / ${dt.getDate()} / ${dt.getFullYear()}`);
     $(".wday1").text(weekdays[dt.getDay()+1]);
     $(".day1").text(`${dt.getMonth() + 1} / ${dt.getDate() + 1} / ${dt.getFullYear()}`);
     $(".wday2").text(weekdays[dt.getDay()+2]);
@@ -49,7 +48,8 @@ $(document).ready(function() {
            }).then(function(response2) {
                console.log(response2);
                // Transfer current weather content to current forecast HTML
-               $(".city").text(city);
+               $(".city").text(city.charAt(0).toUpperCase()+city.slice(1));
+               $(".icon").attr("src","http://openweathermap.org/img/wn/"+response2.current.weather[0].icon+"@2x.png")
                let currentTempF = convertTemp(response2.current.temp);
                $(".tempF").text("Temperature: " + currentTempF.toFixed(2) + String.fromCharCode(176) + " F");
                $(".humidity").text("Humidity: " + response2.current.humidity + "%");
@@ -63,6 +63,7 @@ $(document).ready(function() {
                    $(".maxDay" + i).text("High: " + maxTemp.toFixed(2) + String.fromCharCode(176) + " F");
                    $(".minDay" + i).text("Low: " + minTemp.toFixed(2) + String.fromCharCode(176) + " F");
                    $(".humDay" + i).text("Humidity: " + response2.daily[i].humidity + "%");
+                   $(".weatherIcon" + i).attr("src","http://openweathermap.org/img/wn/"+response2.daily[i].weather[0].icon+"@2x.png")
                 }
                });
         });
@@ -72,7 +73,7 @@ $(document).ready(function() {
         cityInput = $(".city-input").val();
         callAPI(cityInput);
         cityEl = $("<a>");
-        cityEl.text(cityInput);
+        cityEl.text(cityInput.charAt(0).toUpperCase()+cityInput.slice(1));
         cityEl.attr("class","list-group-item list-group-item-action");
         $(".cityList").prepend(cityEl);
     })
