@@ -54,7 +54,17 @@ $(document).ready(function() {
                $(".tempF").text("Temperature: " + currentTempF.toFixed(2) + String.fromCharCode(176) + " F");
                $(".humidity").text("Humidity: " + response2.current.humidity + "%");
                $(".wind").text("Wind Speed: " + response2.current.wind_speed + " m/s");
-               $(".uvIndex").text("UV Index: " + response2.current.uvi);
+               let uvi = response2.current.uvi;
+               if(uvi<=2){
+                $(".uvIndex").attr("class","uvIndex rounded px-2 bg-success");
+                $(".uvIndex").text("UV Index: " + uvi + " Favorable");
+               } else if(uvi>2 && uvi<=7){
+                $(".uvIndex").attr("class","uvIndex rounded px-2 bg-warning");
+                $(".uvIndex").text("UV Index: " + uvi + " Moderate");
+               } else{
+                $(".uvIndex").attr("class","uvIndex rounded px-2 bg-danger");
+                $(".uvIndex").text("UV Index: " + uvi + " Severe");
+               }
     
                // Transfer daily content to five day forecast HTML
                for (let i = 1; i < 6; i++) {
