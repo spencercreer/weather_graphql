@@ -52,7 +52,7 @@ $(document).ready(function() {
                $(".city").text(city.charAt(0).toUpperCase()+city.slice(1));
                $(".icon").attr("src","http://openweathermap.org/img/wn/"+response2.current.weather[0].icon+"@2x.png")
                let currentTempF = convertTemp(response2.current.temp);
-               $(".tempF").text("Temperature: " + currentTempF.toFixed(2) + String.fromCharCode(176) + " F");
+               $(".tempF").text("Temperature: " + currentTempF.toFixed(0) + String.fromCharCode(176) + " F");
                $(".humidity").text("Humidity: " + response2.current.humidity + "%");
                $(".wind").text("Wind Speed: " + response2.current.wind_speed + " m/s");
                let uvi = response2.current.uvi;
@@ -75,8 +75,8 @@ $(document).ready(function() {
                for (let i = 1; i < 6; i++) {
                    let maxTemp = convertTemp(response2.daily[i].temp.max);
                    let minTemp = convertTemp(response2.daily[i].temp.min);
-                   $(".maxDay" + i).text("High: " + maxTemp.toFixed(2) + String.fromCharCode(176) + " F");
-                   $(".minDay" + i).text("Low: " + minTemp.toFixed(2) + String.fromCharCode(176) + " F");
+                   $(".maxDay" + i).text("High: " + maxTemp.toFixed(0) + String.fromCharCode(176) + " F");
+                   $(".minDay" + i).text("Low: " + minTemp.toFixed(0) + String.fromCharCode(176) + " F");
                    $(".humDay" + i).text("Humidity: " + response2.daily[i].humidity + "%");
                    $(".weatherIcon" + i).attr("src","http://openweathermap.org/img/wn/"+response2.daily[i].weather[0].icon+"@2x.png")
                 }

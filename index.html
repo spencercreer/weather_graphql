@@ -12,115 +12,125 @@
   </head>
   <body>
     <div class="jumbotron mt-2 p-0">
-      <!-- Weather Dashboard header -->
-        <h1 class="text-center bg-primary text-light">Weather Dashboard</h1>
+      <h1 class="text-center bg-primary text-light">Weather Dashboard</h1>
+
+      <div class="container-fluid">
         <div class="row">
-            <div class="col-4 float-left px-3">
-                <aside>
-                  <!-- City input and search button -->
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control city-input" placeholder="Search a City" aria-label="City" aria-describedby="basic-addon2">
-                        <div class="input-group-append">
-                          <button class="btn btn-primary searchBtn" type="button">Search</button>
-                        </div>
-                      </div>
-                      <!-- Cities list -->
-                      <div class="list-group cityList">
-                      </div>
-                </aside>
+          <div class="mx-auto col-11 px-0">
+            <!-- City input and search button -->
+            <div class="col-4 float-left pr-1 pl-0">
+              <div class="input-group mb-3">
+                <input type="text" class="form-control city-input" placeholder="Search a City" aria-label="City" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                  <button class="btn btn-primary searchBtn" type="button">Search</button>
+                </div>
+              </div>
+              <!-- Cities list -->
+              <div class="list-group cityList pl-0">
+              </div>
             </div>
             <!-- Current day forecast -->
-            <div class="row col-8">
-                <div class="card col-12">
-                    <div class="card-body py-1">
-                      <div class="row">
-                        <div class="col-sm-6 pr-0">
-                          <h2 class="city px-2"></h2>
-                          <h5 class="currentDay px-2"></h5>
-                          <h5 class="currentDate px-2"></h5>
-                              <p class="tempF px-2"></p>
-                              <p class="humidity px-2"></p>
-                              <p class="wind px-2"></p>
-                              <p class="uvIndex rounded px-2"></p>
-                        </div>
-                            <div class="col-sm-6 p-0">
-                              <img class="icon float-left img-fluid" style="display: inline-block; height: 250px; width: 250px;">
-                            </div>
-                      </div>
-                      </div>
+            <div class="row col-8 pl-1 pr-0">
+              <div class="card col-12 px-0">
+                <div class="card-body py-1">
+                  <div class="row">
+                    <div class="col-sm-6 pr-0">
+                      <h2 class="city px-2"></h2>
+                      <h5 class="currentDay px-2"></h5>
+                      <h5 class="currentDate px-2"></h5>
+                      <p class="tempF px-2"></p>
+                      <p class="humidity px-2"></p>
+                      <p class="wind px-2"></p>
+                      <p class="uvIndex rounded px-2"></p>
+                    </div>
+                    <!-- Current day icon -->
+                    <div class="col-sm-6 p-0">
+                      <img class="icon mx-auto d-block img-fluid" style="display: inline-block; height: 200px; width: 200px;">
                     </div>
                   </div>
-            </div>
-                <!-- Five day forecast -->
-                <div class="container-fluid">
-                  <div class="row mx-auto">
-                  <div class="col-12">
-                      <h3>Five Day Weather Forecast</h3>
-                      <div class="card-group">
-                          <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
-                              <div class="card-header text-center pb-0">
-                                <h5 class="wday1"></h5>
-                                <h5 class="day1 m-0"></h5>
-                                <img class="weatherIcon1">
-                              </div>
-                              <div class="card-body">
-                                <p class="card-text maxDay1"></p>
-                                <p class="card-text minDay1"></p>
-                                <p class="card-text humDay1"></p>
-                              </div>
-                            </div>
-                            <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
-                              <div class="card-header text-center pb-0">
-                                <h5 class="wday2"></h5>
-                                <h5 class="day2 m-0"></h5>
-                                <img class="weatherIcon2">
-                              </div>
-                              <div class="card-body">
-                                <p class="card-text maxDay2"></p>
-                                <p class="card-text minDay2"></p>
-                                <p class="card-text humDay2"></p>
-                              </div>
-                            </div>
-                            <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
-                              <div class="card-header text-center pb-0">
-                                <h5 class="wday3"></h5>
-                                <h5 class="day3 m-0"></h5>
-                                <img class="weatherIcon3"></div>
-                              <div class="card-body">
-                                <p class="card-text maxDay3"></p>
-                                <p class="card-text minDay3"></p>
-                                <p class="card-text humDay3"></p>
-                              </div>
-                            </div>
-                            <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
-                              <div class="card-header text-center pb-0">
-                                <h5 class="wday4"></h5>
-                                <h5 class="day4 m-0"></h5>
-                                <img class="weatherIcon4">
-                              </div>
-                              <div class="card-body">
-                                <p class="card-text maxDay4"></p>
-                                <p class="card-text minDay4"></p>
-                                <p class="card-text humDay4"></p>
-                              </div>
-                            </div>
-                            <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
-                              <div class="card-header text-center pb-0">
-                                <h5 class="wday5"></h5>
-                                <h5 class="day5 m-0"></h5>
-                                <img class="weatherIcon5">
-                              </div>
-                              <div class="card-body">
-                                <p class="card-text maxDay5"></p>
-                                <p class="card-text minDay5"></p>
-                                <p class="card-text humDay5"></p>
-                              </div>
-                            </div>
-                          </div>
-                      </div>
-                  </div>
                 </div>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
+
+      <!-- Five day forecast -->
+      <div class="container-fluid">
+        <div class="row">
+          <div class="mx-auto px-0 col-11">
+            <h3>Five Day Weather Forecast</h3>
+            <div class="card-group">
+              <!-- Day One -->
+              <div class="card text-white bg-primary mb-3">
+                <div class="card-header text-center pb-0">
+                  <h5 class="wday1"></h5>
+                  <h5 class="day1 m-0"></h5>
+                    <img class="weatherIcon1">
+                </div>
+                <div class="card-body">
+                  <p class="card-text maxDay1 text-center"></p>
+                  <p class="card-text minDay1 text-center"></p>
+                  <p class="card-text humDay1 text-center"></p>
+                </div>
+              </div>
+              <!-- Day Two -->
+              <div class="card text-white bg-primary mb-3">
+                <div class="card-header text-center pb-0">
+                  <h5 class="wday2"></h5>
+                  <h5 class="day2 m-0"></h5>
+                    <img class="weatherIcon2">
+                </div>
+                <div class="card-body">
+                  <p class="card-text maxDay2 text-center"></p>
+                  <p class="card-text minDay2 text-center"></p>
+                  <p class="card-text humDay2 text-center"></p>
+                </div>
+              </div>
+              <!-- Day Three -->
+              <div class="card text-white bg-primary mb-3">
+                <div class="card-header text-center pb-0">
+                  <h5 class="wday3"></h5>
+                  <h5 class="day3 m-0"></h5>
+                    <img class="weatherIcon3">
+                </div>
+                <div class="card-body">
+                  <p class="card-text maxDay3 text-center"></p>
+                  <p class="card-text minDay3 text-center"></p>
+                  <p class="card-text humDay3 text-center"></p>
+                </div>
+              </div>
+              <!-- Day Four -->
+              <div class="card text-white bg-primary mb-3">
+                <div class="card-header text-center pb-0">
+                  <h5 class="wday4"></h5>
+                  <h5 class="day4 m-0"></h5>
+                    <img class="weatherIcon4">
+                </div>
+                <div class="card-body">
+                  <p class="card-text maxDay4 text-center"></p>
+                  <p class="card-text minDay4 text-center"></p>
+                  <p class="card-text humDay4 text-center"></p>
+                </div>
+              </div>
+              <!-- Day Five -->
+              <div class="card text-white bg-primary mb-3">
+                <div class="card-header text-center pb-0">
+                  <h5 class="wday5"></h5>
+                  <h5 class="day5 m-0"></h5>
+                    <img class="weatherIcon5">
+                </div>
+                <div class="card-body">
+                  <p class="card-text maxDay5 text-center"></p>
+                  <p class="card-text minDay5 text-center"></p>
+                  <p class="card-text humDay5 text-center"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
       
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
