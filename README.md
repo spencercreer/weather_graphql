@@ -17,4 +17,4 @@ Repository: https://github.com/spencercreer/weather_dashboard
 
 The following image shows the application's appearance:
 
-![Weather dashboard application](./assets/weather_dashboard.png)
+![Weather dashboard application](./assets/weather_dashboard.PNG)
