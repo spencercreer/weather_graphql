@@ -95,6 +95,8 @@ $(document).ready(function() {
         $(".cityList").prepend(cityEl);
         // Add searched city to localStorage
         localStorage.setItem("searchedCity",cityInput.charAt(0).toUpperCase()+cityInput.slice(1));
+        cityInput.val("");
+        cityInput.focus();
     })
 
     $(document.body).on("click", "a", function(){
