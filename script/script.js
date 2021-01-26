@@ -1,20 +1,21 @@
 $(document).ready(function() {
-    var weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    var weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday","Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     let dt = new Date();
-
+    let yr = dt.getFullYear();
+    let yrStr = yr.toString();
         
     $(".currentDay").text(weekdays[dt.getDay()]);
     $(".currentDate").text(`${dt.getMonth() + 1} / ${dt.getDate()} / ${dt.getFullYear()}`);
     $(".wday1").text(weekdays[dt.getDay()+1]);
-    $(".day1").text(`${dt.getMonth() + 1} / ${dt.getDate() + 1} / ${dt.getFullYear()}`);
+    $(".day1").text(`${dt.getMonth() + 1} / ${dt.getDate() + 1} / ${yrStr.substr(2,3)}`);
     $(".wday2").text(weekdays[dt.getDay()+2]);
-    $(".day2").text(`${dt.getMonth() + 1} / ${dt.getDate() + 2} / ${dt.getFullYear()}`);
+    $(".day2").text(`${dt.getMonth() + 1} / ${dt.getDate() + 2} / ${yrStr.substr(2,3)}`);
     $(".wday3").text(weekdays[dt.getDay()+3]);
-    $(".day3").text(`${dt.getMonth() + 1} / ${dt.getDate() + 3} / ${dt.getFullYear()}`);
+    $(".day3").text(`${dt.getMonth() + 1} / ${dt.getDate() + 3} / ${yrStr.substr(2,3)}`);
     $(".wday4").text(weekdays[dt.getDay()+4]);
-    $(".day4").text(`${dt.getMonth() + 1} / ${dt.getDate() + 4} / ${dt.getFullYear()}`);
+    $(".day4").text(`${dt.getMonth() + 1} / ${dt.getDate() + 4} / ${yrStr.substr(2,3)}`);
     $(".wday5").text(weekdays[dt.getDay()+5]);
-    $(".day5").text(`${dt.getMonth() + 1} / ${dt.getDate() + 5} / ${dt.getFullYear()}`);
+    $(".day5").text(`${dt.getMonth() + 1} / ${dt.getDate() + 5} / ${yrStr.substr(2,3)}`);
 
     let cityEl = $("<a>");
     let storedCity = "";

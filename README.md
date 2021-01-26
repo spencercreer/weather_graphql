@@ -13,8 +13,8 @@ URL: https://spencercreer.github.io/weather_dashboard/
 
 Repository: https://github.com/spencercreer/weather_dashboard 
 
-## Animation
+## Images
 
-The following animation demonstrates the application functionality:
+The following image shows the application's appearance:
 
-![Weather dashboard application]()
+![Weather dashboard application](./assets/weather_dashboard.png)
