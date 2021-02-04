@@ -40,7 +40,7 @@ $(document).ready(function() {
             // Get latitude and longitude of searched city
             var latitude = response.coord.lat;
             var longitude = response.coord.lon;
-    
+            
             var queryURL2 = "https://api.openweathermap.org/data/2.5/onecall?lat="+latitude+"&lon="+longitude+"&exclude=hourly,minutely&appid=" + APIKey;
     
             // Ajax call Openweather API latitude and longitude
@@ -49,6 +49,7 @@ $(document).ready(function() {
                method: "GET"
            }).then(function(response2) {
                
+            console.log(response2)
                // Transfer current weather content to current forecast HTML
                $(".city").text(city.charAt(0).toUpperCase()+city.slice(1));
                $(".icon").attr("src","http://openweathermap.org/img/wn/"+response2.current.weather[0].icon+"@2x.png")
@@ -96,8 +97,8 @@ $(document).ready(function() {
         $(".cityList").prepend(cityEl);
         // Add searched city to localStorage
         localStorage.setItem("searchedCity",cityInput.charAt(0).toUpperCase()+cityInput.slice(1));
-        cityInput.val("");
-        cityInput.focus();
+        $(".city-input").val("");
+        $(".city-input").focus();
     })
 
     $(document.body).on("click", "a", function(){
