@@ -1,20 +1,52 @@
-# weather_dashboard
-API Weather application.
+# Weather Dashboard
+![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)
 
-This weather application retrieves weather data from the [OpenWeather API](https://openweathermap.org/api) and displays it to the user. When the user enters a city in the input field and clicks the "Search" button, the application gets the API data for the searched city. 
+## Description
+OpenWeather API weather application.
 
-The application displays the current and five day forecasts for the searched city. The current forecast includes the current temperature, humidity, wind speed and UV index. The UV index indicates whether conditions are favorable, moderate, or severe.
+This application retrieves weather data from the OpenWeather API and displays it to the user. It displays the current and 5-day forecasts for a searched city. The current forecast includes the current temperature, humidity, wind speed and UV index. The UV index indicates whether conditions are favorable, moderate, or severe.
 
 The application prepends the searched city to a list and stores it in local storage. When the application is run, the last searched city's forecast is displayed.
 
+## Table of Contents
+* [Links](#links)
+* [Animation](#animation) 
+* [Instructions](#instructions)   
+* [Technologies](#technologies) 
+* [APIs](#apis) 
+* [License](#license)
+* [Contact](#contact)
+
 ## Links
+Published URL: [https://spencercreer.github.io/weather_dashboard/](https://spencercreer.github.io/weather_dashboard/)
 
-URL: https://spencercreer.github.io/weather_dashboard/
+Repository: [https://github.com/spencercreer/weather_dashboard](https://github.com/spencercreer/weather_dashboard)
 
-Repository: https://github.com/spencercreer/weather_dashboard 
 
-## Images
+## Animation
+The following image demonstrates the application appearance:
+![Weather Dashboard animation](./assets/weather_dashboard.PNG)
 
-The following image shows the application's appearance:
+## Instructions
+The user may search the weather of a city by entering the city name in the input element. A list of searched cities is created and the user may recall previously searched weather forecasts by clicking a list element.
 
-![Weather dashboard application](./assets/weather_dashboard.PNG)
+## Contribute
+Please submit a PR if you would like to contribute.
+## Technologies
+ * JavaScript
+ * HTML
+ * Bootstrap
+ * jQuery
+
+## APIs
+  * [OpenWeather API](https://openweathermap.org/api)
+
+## License
+This project is licensed under the MIT license.
+
+## Contact
+For questions or comments, please contact me.
+
+Email: <a href="mailto: spencercreer@gmail.com" target="_blank">spencercreer@gmail.com</a>
+
+GitHub: [spencercreer](https://github.com/spencercreer/)
