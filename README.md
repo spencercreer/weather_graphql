@@ -39,6 +39,7 @@ Please submit a PR if you would like to contribute.
  * jQuery
 
 ## APIs
+The application utilizes the following APIs:
   * [OpenWeather API](https://openweathermap.org/api)
 
 ## License
