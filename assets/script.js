@@ -86,7 +86,7 @@ $(document).ready(function() {
         });
     }
 
-    $(".searchBtn").click(function(){
+    function searchCity(){
         // Search button click, get search input value and call API
         cityInput = $(".city-input").val();
         callAPI(cityInput);
@@ -99,7 +99,7 @@ $(document).ready(function() {
         localStorage.setItem("searchedCity",cityInput.charAt(0).toUpperCase()+cityInput.slice(1));
         $(".city-input").val("");
         $(".city-input").focus();
-    })
+    }
 
     $(document.body).on("click", "a", function(){
         // City list element click, get list element city and call API
@@ -125,4 +125,11 @@ $(document).ready(function() {
         cityEl.attr("class","list-group-item list-group-item-action");
         $(".cityList").prepend(cityEl);
     }
+
+    $(".searchBtn").click(searchCity);
+    $(".city-input").keypress(function(event){
+        if(event.key == "Enter") {
+            searchCity();
+        }
+    });
 })
