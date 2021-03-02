@@ -49,8 +49,7 @@ $(document).ready(function() {
                url: queryURL2,
                method: "GET"
            }).then(function(response2) {
-               
-            console.log(response2)
+
                // Transfer current weather content to current forecast HTML
                $(".city").text(city.charAt(0).toUpperCase()+city.slice(1));
                $(".icon").attr("src","http://openweathermap.org/img/wn/"+response2.current.weather[0].icon+"@2x.png")
@@ -84,7 +83,10 @@ $(document).ready(function() {
                    $(".weatherIcon" + i).attr("src","http://openweathermap.org/img/wn/"+response2.daily[i].weather[0].icon+"@2x.png")
                 }
             });
-        });
+        })
+        .fail(function() {
+            alert("City not found!")
+        })
     }
 
     function searchCity(){
