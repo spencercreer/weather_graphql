@@ -19,6 +19,7 @@ $(document).ready(function() {
 
     let cityEl = $("<a>");
     let storedCity = "";
+    var numCities = 0;
 
     function convertTemp(tempK){
         //Convert temp Kelvin to Fahrenheit
@@ -82,7 +83,7 @@ $(document).ready(function() {
                    $(".humDay" + i).text("Humidity: " + response2.daily[i].humidity + "%");
                    $(".weatherIcon" + i).attr("src","http://openweathermap.org/img/wn/"+response2.daily[i].weather[0].icon+"@2x.png")
                 }
-               });
+            });
         });
     }
 
@@ -91,14 +92,19 @@ $(document).ready(function() {
         cityInput = $(".city-input").val();
         callAPI(cityInput);
         // Add searched city to cities list
+        numCities++; 
         let cityEl = $("<a>");
         cityEl.text(cityInput.charAt(0).toUpperCase()+cityInput.slice(1));
         cityEl.attr("class","list-group-item list-group-item-action");
+        cityEl.attr("id","searched-city"+numCities);
         $(".cityList").prepend(cityEl);
         // Add searched city to localStorage
         localStorage.setItem("searchedCity",cityInput.charAt(0).toUpperCase()+cityInput.slice(1));
         $(".city-input").val("");
         $(".city-input").focus();
+        if(numCities>3){
+            $("#searched-city"+(numCities-4)).remove();
+        }
     }
 
     $(document.body).on("click", "a", function(){
@@ -116,6 +122,7 @@ $(document).ready(function() {
         // Add New York to cities list
         cityEl.text(storedCity);
         cityEl.attr("class","list-group-item list-group-item-action");
+        cityEl.attr("id","searched-city"+numCities);
         $(".cityList").prepend(cityEl);
     } else{
         storedCity = localStorage.getItem("searchedCity");
@@ -123,10 +130,13 @@ $(document).ready(function() {
         // Add stored city to cities list
         cityEl.text(storedCity);
         cityEl.attr("class","list-group-item list-group-item-action");
+        cityEl.attr("id","searched-city"+numCities);
         $(".cityList").prepend(cityEl);
     }
 
+    // Search Button click searchCity
     $(".searchBtn").click(searchCity);
+    // City input enter keypress searchCity
     $(".city-input").keypress(function(event){
         if(event.key == "Enter") {
             searchCity();
