@@ -1,144 +1,173 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <title>Weather Dashboard</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/v4-shims.css">
-  </head>
-  <body>
-    <div class="jumbotron my-2 p-0">
-      <h1 class="text-center bg-primary text-light">Weather Dashboard</h1>
-      <div class="container-fluid">
-        <div class="row">
-          <div class="mx-auto col-11 px-0">
-            <!-- City input and search button -->
-            <div class="col-5 float-left pr-3 pl-0">
-              <div class="input-group mb-3">
-                <input type="text" class="form-control city-input" placeholder="Search a City" aria-label="City" aria-describedby="basic-addon2">
-                <div class="input-group-append">
-                  <button class="btn btn-primary searchBtn fas fa-search" type="button"></button>
-                </div>
-              </div>
-              <!-- Cities list -->
-              <div class="list-group cityList pl-0">
+
+<head>
+  <title>Weather Dashboard</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/v4-shims.css">
+  <link rel="apple-touch-icon" sizes="57x57" href="./assets">
+  <link rel="apple-touch-icon" sizes="60x60" href="./assets/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="./assets/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="./assets/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="./assets/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="./assets/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="./assets/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="./assets/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="./assets/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="./assets/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="./assets/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon-16x16.png">
+  <link rel="manifest" href="./assets/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+  <div class="jumbotron my-2 p-0">
+    <h1 class="text-center bg-primary text-light">Weather Dashboard</h1>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="mx-auto col-11 px-0">
+          <!-- City input and search button -->
+          <div class="col-5 float-left pr-3 pl-0">
+            <div class="input-group mb-3">
+              <input type="text" class="form-control city-input" placeholder="Search a City" aria-label="City"
+                aria-describedby="basic-addon2">
+              <div class="input-group-append">
+                <button class="btn btn-primary searchBtn fas fa-search" type="button"></button>
               </div>
             </div>
-            <!-- Current day forecast -->
-            <div class="row col-7 pl-1 pr-0">
-              <div class="card col-12 px-0">
-                <div class="card-body py-1">
-                  <div class="row">
-                    <div class="col-sm-6 px-0">
-                      <h2 class="city px-2"></h2>
-                      <h5 class="currentDay px-2"></h5>
-                      <h5 class="currentDate px-2"></h5>
-                      <p class="tempF px-2"></p>
-                      <p class="humidity px-2"></p>
-                      <p class="wind px-2"></p>
-                      <p class="uvIndex rounded px-2"></p>
-                    </div>
-                    <!-- Current day icon -->
-                    <div class="col-sm-6 p-0">
-                      <img class="icon mx-auto d-block img-fluid" style="display: inline-block; height: 200px; width: 200px;">
-                    </div>
+            <!-- Cities list -->
+            <div class="list-group cityList pl-0">
+            </div>
+          </div>
+          <!-- Current day forecast -->
+          <div class="row col-7 pl-1 pr-0">
+            <div class="card col-12 px-0">
+              <div class="card-body py-1">
+                <div class="row">
+                  <div class="col-sm-6 px-0">
+                    <h2 class="city px-2"></h2>
+                    <h5 class="currentDay px-2"></h5>
+                    <h5 class="currentDate px-2"></h5>
+                    <p class="tempF px-2"></p>
+                    <p class="humidity px-2"></p>
+                    <p class="wind px-2"></p>
+                    <p class="uvIndex rounded px-2"></p>
+                  </div>
+                  <!-- Current day icon -->
+                  <div class="col-sm-6 p-0">
+                    <img class="icon mx-auto d-block img-fluid"
+                      style="display: inline-block; height: 200px; width: 200px;">
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <!-- Five day forecast -->
-        <div class="row">
-          <div class="mx-auto col-11 px-0">
-            <h3>Five Day Weather Forecast</h3>
-            <div class="card-group">
-              <!-- Day One -->
-              <div class="card text-white bg-primary mb-3">
-                <div class="card-header text-center pb-0">
-                  <h5 class="wday1"></h5>
-                  <h5 class="day1 m-0"></h5>
-                    <img class="weatherIcon1">
-                </div>
-                <div class="card-body">
-                  <p class="card-text maxDay1 text-center"></p>
-                  <p class="card-text minDay1 text-center"></p>
-                  <p class="card-text humDay1 text-center"></p>
-                </div>
+      </div>
+      <!-- Five day forecast -->
+      <div class="row">
+        <div class="mx-auto col-11 px-0">
+          <h3>Five Day Weather Forecast</h3>
+          <div class="card-group">
+            <!-- Day One -->
+            <div class="card text-white bg-primary mb-3">
+              <div class="card-header text-center pb-0">
+                <h5 class="wday1"></h5>
+                <h5 class="day1 m-0"></h5>
+                <img class="weatherIcon1">
               </div>
-              <!-- Day Two -->
-              <div class="card text-white bg-primary mb-3">
-                <div class="card-header text-center pb-0">
-                  <h5 class="wday2"></h5>
-                  <h5 class="day2 m-0"></h5>
-                    <img class="weatherIcon2">
-                </div>
-                <div class="card-body">
-                  <p class="card-text maxDay2 text-center"></p>
-                  <p class="card-text minDay2 text-center"></p>
-                  <p class="card-text humDay2 text-center"></p>
-                </div>
+              <div class="card-body">
+                <p class="card-text maxDay1 text-center"></p>
+                <p class="card-text minDay1 text-center"></p>
+                <p class="card-text humDay1 text-center"></p>
               </div>
-              <!-- Day Three -->
-              <div class="card text-white bg-primary mb-3">
-                <div class="card-header text-center pb-0">
-                  <h5 class="wday3"></h5>
-                  <h5 class="day3 m-0"></h5>
-                    <img class="weatherIcon3">
-                </div>
-                <div class="card-body">
-                  <p class="card-text maxDay3 text-center"></p>
-                  <p class="card-text minDay3 text-center"></p>
-                  <p class="card-text humDay3 text-center"></p>
-                </div>
+            </div>
+            <!-- Day Two -->
+            <div class="card text-white bg-primary mb-3">
+              <div class="card-header text-center pb-0">
+                <h5 class="wday2"></h5>
+                <h5 class="day2 m-0"></h5>
+                <img class="weatherIcon2">
               </div>
-              <!-- Day Four -->
-              <div class="card text-white bg-primary mb-3">
-                <div class="card-header text-center pb-0">
-                  <h5 class="wday4"></h5>
-                  <h5 class="day4 m-0"></h5>
-                    <img class="weatherIcon4">
-                </div>
-                <div class="card-body">
-                  <p class="card-text maxDay4 text-center"></p>
-                  <p class="card-text minDay4 text-center"></p>
-                  <p class="card-text humDay4 text-center"></p>
-                </div>
+              <div class="card-body">
+                <p class="card-text maxDay2 text-center"></p>
+                <p class="card-text minDay2 text-center"></p>
+                <p class="card-text humDay2 text-center"></p>
               </div>
-              <!-- Day Five -->
-              <div class="card text-white bg-primary mb-3">
-                <div class="card-header text-center pb-0">
-                  <h5 class="wday5"></h5>
-                  <h5 class="day5 m-0"></h5>
-                    <img class="weatherIcon5">
-                </div>
-                <div class="card-body">
-                  <p class="card-text maxDay5 text-center"></p>
-                  <p class="card-text minDay5 text-center"></p>
-                  <p class="card-text humDay5 text-center"></p>
-                </div>
+            </div>
+            <!-- Day Three -->
+            <div class="card text-white bg-primary mb-3">
+              <div class="card-header text-center pb-0">
+                <h5 class="wday3"></h5>
+                <h5 class="day3 m-0"></h5>
+                <img class="weatherIcon3">
+              </div>
+              <div class="card-body">
+                <p class="card-text maxDay3 text-center"></p>
+                <p class="card-text minDay3 text-center"></p>
+                <p class="card-text humDay3 text-center"></p>
+              </div>
+            </div>
+            <!-- Day Four -->
+            <div class="card text-white bg-primary mb-3">
+              <div class="card-header text-center pb-0">
+                <h5 class="wday4"></h5>
+                <h5 class="day4 m-0"></h5>
+                <img class="weatherIcon4">
+              </div>
+              <div class="card-body">
+                <p class="card-text maxDay4 text-center"></p>
+                <p class="card-text minDay4 text-center"></p>
+                <p class="card-text humDay4 text-center"></p>
+              </div>
+            </div>
+            <!-- Day Five -->
+            <div class="card text-white bg-primary mb-3">
+              <div class="card-header text-center pb-0">
+                <h5 class="wday5"></h5>
+                <h5 class="day5 m-0"></h5>
+                <img class="weatherIcon5">
+              </div>
+              <div class="card-body">
+                <p class="card-text maxDay5 text-center"></p>
+                <p class="card-text minDay5 text-center"></p>
+                <p class="card-text humDay5 text-center"></p>
               </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
   </div>
   <footer class="footer mt-auto">
     <div class="container py-3">
       <span class="text-muted">Coded by Spencer Creer using Bootstrap CSS framework and OpenWeather API
-        <a class="text-dark link-text mx-2" href="https://www.linkedin.com/in/spencer-creer-023246109/" target="_blank" style="font-size: 25px;"><i class="fa fa-linkedin-square link-in"></i></a>
-        <a class="text-dark link-text mx-2 pt-3" href="https://github.com/spencercreer" target="_blank"><i class="fa fa-github link-git" style="font-size: 25px;"></i></a>
+        <a class="text-dark link-text mx-2" href="https://www.linkedin.com/in/spencer-creer-023246109/" target="_blank"
+          style="font-size: 25px;"><i class="fa fa-linkedin-square link-in"></i></a>
+        <a class="text-dark link-text mx-2 pt-3" href="https://github.com/spencercreer" target="_blank"><i
+            class="fa fa-github link-git" style="font-size: 25px;"></i></a>
       </span>
     </div>
   </footer>
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="assets/script.js"></script>
-  </body>
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="assets/script.js"></script>
+</body>
+
 </html>
