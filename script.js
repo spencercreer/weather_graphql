@@ -1,22 +1,14 @@
-$(document).ready(function() {
-    var weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday","Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-    let dt = new Date();
-    let yr = dt.getFullYear();
-    let yrStr = yr.toString();
-        
-    $(".currentDay").text(weekdays[dt.getDay()]);
-    $(".currentDate").text(`${dt.getMonth() + 1} / ${dt.getDate()} / ${dt.getFullYear()}`);
-    $(".wday1").text(weekdays[dt.getDay()+1]);
-    $(".day1").text(`${dt.getMonth() + 1} / ${dt.getDate() + 1} / ${yrStr.substr(2,3)}`);
-    $(".wday2").text(weekdays[dt.getDay()+2]);
-    $(".day2").text(`${dt.getMonth() + 1} / ${dt.getDate() + 2} / ${yrStr.substr(2,3)}`);
-    $(".wday3").text(weekdays[dt.getDay()+3]);
-    $(".day3").text(`${dt.getMonth() + 1} / ${dt.getDate() + 3} / ${yrStr.substr(2,3)}`);
-    $(".wday4").text(weekdays[dt.getDay()+4]);
-    $(".day4").text(`${dt.getMonth() + 1} / ${dt.getDate() + 4} / ${yrStr.substr(2,3)}`);
-    $(".wday5").text(weekdays[dt.getDay()+5]);
-    $(".day5").text(`${dt.getMonth() + 1} / ${dt.getDate() + 5} / ${yrStr.substr(2,3)}`);
+$(document).ready(function() { 
+    // add weekday and date to current forecast card  
+    $(".currentDay").text(moment().format('dddd'));
+    $(".currentDate").text(moment().format('l'));
 
+    // add weekday and date to five day forecast cards  
+    for(let i = 1; i < 6; i++) {
+        $(`.wday${i}`).text(moment().add(i,'days').format('dddd'));
+        $(`.day${i}`).text(moment().add(i,'days').format('l'));
+    }
+ 
     let cityEl = $("<a>");
     let storedCity = "";
     var numCities = 0;
@@ -90,7 +82,7 @@ $(document).ready(function() {
     }
 
     function searchCity(){
-        // Search button click, get search input value and call API
+        // Search button clicked, get search input value and call API
         cityInput = $(".city-input").val();
         callAPI(cityInput);
         // Add searched city to cities list
@@ -137,10 +129,10 @@ $(document).ready(function() {
     }
 
     // Search Button click searchCity
-    $(".searchBtn").click(searchCity);
+    $("#searchBtn").click(searchCity);
     // City input enter keypress searchCity
-    $(".city-input").keypress(function(event){
-        if(event.key == "Enter") {
+    $("#city-input").keypress(function(event){
+        if(event.key === "Enter") {
             searchCity();
         }
     });
