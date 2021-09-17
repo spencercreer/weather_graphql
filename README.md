@@ -1,3 +1,7 @@
+<p>
+<img src="./assets/icons/ms-icon-150x150.png" align="right" width="50">
+</p>
+
 # Weather Dashboard
 ![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)
 
@@ -32,6 +36,7 @@ The user may search the weather of a city by entering the city name in the input
 
 ## Contribute
 Please submit a PR if you would like to contribute.
+
 ## Technologies
  * JavaScript
  * HTML
