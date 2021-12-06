@@ -110,10 +110,10 @@ $(document).ready(function() {
     })
 
     if(!localStorage.getItem("searchedCity")){
-        localStorage.setItem("searchedCity","New York");
+        localStorage.setItem("searchedCity","Phoenix");
         storedCity = localStorage.getItem("searchedCity");
         callAPI(storedCity);
-        // Add New York to cities list
+        // Add Phoenix to cities list
         cityEl.text(storedCity);
         cityEl.attr("class","list-group-item list-group-item-action");
         cityEl.attr("id","searched-city"+numCities);
