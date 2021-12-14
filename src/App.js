@@ -19,19 +19,19 @@ function App() {
         </Col>
       </Row>
       <Row>
-        <Col sm>
+        <Col md>
           <ForecastCard />
         </Col>
-        <Col sm>
+        <Col md>
           <ForecastCard />
         </Col>
-        <Col sm>
+        <Col md>
           <ForecastCard />
         </Col>
-        <Col sm>
+        <Col md>
           <ForecastCard />
         </Col>
-        <Col sm>
+        <Col md>
           <ForecastCard />
         </Col>
       </Row>
