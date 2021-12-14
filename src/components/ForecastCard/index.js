@@ -1,5 +1,3 @@
-import React from 'react'
-
 export default function index() {
     return (
         <div className="card text-white bg-primary mb-3">

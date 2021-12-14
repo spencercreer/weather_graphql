@@ -1,5 +1,3 @@
-import React from 'react'
-
 export default function index() {
     return (
         <div className="card col-12 px-0">
