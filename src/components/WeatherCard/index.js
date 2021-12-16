@@ -1,4 +1,4 @@
-export default function index() {
+export default function WeatherCard() {
     return (
         <div className="card col-12 px-0">
             <div className="card-body py-1">

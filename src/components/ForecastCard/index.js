@@ -1,4 +1,4 @@
-export default function index() {
+export default function ForecastCard() {
     return (
         <div className="card text-white bg-primary mb-3">
             <div className="card-header text-center pb-0">

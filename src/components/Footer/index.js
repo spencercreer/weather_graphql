@@ -1,4 +1,4 @@
-export default function index() {
+export default function Footer() {
     return (
         <footer className="footer mt-auto">
             <div className="container py-3">

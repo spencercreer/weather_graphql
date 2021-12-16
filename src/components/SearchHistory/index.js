@@ -1,4 +1,4 @@
-export default function index() {
+export default function SearchHistory() {
     return (
         <div className="list-group cityList pl-0">
         </div>

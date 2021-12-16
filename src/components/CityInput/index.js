@@ -1,6 +1,6 @@
 import { InputGroup, FormControl, Button } from 'react-bootstrap'
 
-export default function index() {
+export default function CityInput() {
     return (
         <>
             <InputGroup className="mb-3">
