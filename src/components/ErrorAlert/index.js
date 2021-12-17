@@ -1,8 +1,10 @@
 import { Alert } from 'react-bootstrap'
 
-export default function ErrorAlert() {
+export default function ErrorAlert({error}) {
     return (
-        <Alert variant='danger'>City not found</Alert>
+        <>
+            {error && <Alert variant='danger'>City not found</Alert>}
+        </>
     )
 }
 

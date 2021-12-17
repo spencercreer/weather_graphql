@@ -1,10 +1,11 @@
-export default function WeatherCard() {
+export default function WeatherCard({ weather }) {
+    console.log(weather)
     return (
         <div className="card col-12 px-0">
             <div className="card-body py-1">
                 <div className="row">
                     <div className="col-sm-6 px-0">
-                        <h2 className="city px-2"></h2>
+                        <h2 className="city px-2">{weather.name}</h2>
                         <h5 className="currentDay px-2"></h5>
                         <h5 className="currentDate px-2"></h5>
                         <p className="tempF px-2"></p>
