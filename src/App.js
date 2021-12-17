@@ -16,6 +16,7 @@ function App() {
   useEffect(() => {
     axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=cb77ba3879d59e814a56609394606986`)
       .then(res => {
+        console.log(res.data)
         setWeatherData(res.data)
       })
       .catch(err => {
@@ -36,9 +37,7 @@ function App() {
           <SearchHistory />
         </Col>
         <Col sm={8}>
-          <WeatherCard
-            weather={weatherData}
-          />
+          <WeatherCard {...weatherData} />
         </Col>
       </Row>
       <Row>
