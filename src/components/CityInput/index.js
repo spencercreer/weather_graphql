@@ -1,8 +1,7 @@
 import { InputGroup, FormControl, Button } from 'react-bootstrap'
 
-export default function CityInput({ handleOnChange, handleOnClick }) {
+export default function CityInput({ handleOnChange, handleSubmit }) {
     return (
-        <>
             <InputGroup className="mb-3">
                 <FormControl
                     type="text"
@@ -15,10 +14,9 @@ export default function CityInput({ handleOnChange, handleOnClick }) {
                         id="search-btn"
                         className="fas fa-search"
                         variant="outline-primary"
-                        onClick={handleOnClick}
+                        onClick={handleSubmit}
                     />
                 </div>
             </InputGroup>
-        </>
     )
 }

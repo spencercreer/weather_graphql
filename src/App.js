@@ -19,9 +19,10 @@ function App() {
 
   const handleOnChange = event => {
     setCity(event.target.value)
+    setError(false)
   }
 
-  const handleOnClick = () => {
+  const handleSubmit = () => {
     axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=cb77ba3879d59e814a56609394606986`)
       .then(res => {
         console.log(res.data)
@@ -29,7 +30,7 @@ function App() {
       })
       .catch(err => {
         if (err)
-          error = true
+          setError(true)
       })
   }
 
@@ -40,9 +41,10 @@ function App() {
         <Col sm={4}>
           <CityInput
             handleOnChange={handleOnChange}
-            handleOnClick={handleOnClick}
+            handleSubmit={handleSubmit}
           />
           <ErrorAlert
+            city={city}
             error={error}
           />
           <SearchHistory />

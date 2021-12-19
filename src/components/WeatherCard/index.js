@@ -32,7 +32,7 @@ export default function WeatherCard({ name, weather, wind }) {
 }
 
 WeatherCard.defaultProps = {
-    name: "Phoenix",
+    name: "",
     weather: [],
     wind: {}
 }
