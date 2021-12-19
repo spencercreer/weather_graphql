@@ -3,7 +3,11 @@ import moment from 'moment'
 
 export default function WeatherCard({ name, weather, wind }) {
 
-    const iconLink = `http://openweathermap.org/img/wn/${weather[0]?.icon}@2x.png`
+    let iconLink = ''
+
+    if (weather.length > 0) {
+        iconLink = `http://openweathermap.org/img/wn/${weather[0]?.icon}@2x.png`
+    }
 
     return (
         <Card>
