@@ -9,11 +9,19 @@ import { Container, Row, Col } from 'react-bootstrap'
 import axios from 'axios'
 
 function App() {
-  const [city, setCity] = useState('Phoenix')
+  const [city, setCity] = useState('')
   const [error, setError] = useState(false)
   const [weatherData, setWeatherData] = useState({})
 
   useEffect(() => {
+
+  }, [])
+
+  const handleOnChange = event => {
+    setCity(event.target.value)
+  }
+
+  const handleOnClick = () => {
     axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=cb77ba3879d59e814a56609394606986`)
       .then(res => {
         console.log(res.data)
@@ -23,14 +31,17 @@ function App() {
         if (err)
           error = true
       })
-  },[])
+  }
 
   return (
     <Container className="px-0" fluid>
       <Header />
       <Row>
         <Col sm={4}>
-          <CityInput />
+          <CityInput
+            handleOnChange={handleOnChange}
+            handleOnClick={handleOnClick}
+          />
           <ErrorAlert
             error={error}
           />
@@ -40,23 +51,7 @@ function App() {
           <WeatherCard {...weatherData} />
         </Col>
       </Row>
-      <Row>
-        <Col md>
-          <ForecastCard />
-        </Col>
-        <Col md>
-          <ForecastCard />
-        </Col>
-        <Col md>
-          <ForecastCard />
-        </Col>
-        <Col md>
-          <ForecastCard />
-        </Col>
-        <Col md>
-          <ForecastCard />
-        </Col>
-      </Row>
+      <ForecastCard />
     </Container>
   );
 }
