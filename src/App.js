@@ -7,6 +7,7 @@ import WeatherCard from './components/WeatherCard'
 import ForecastCard from './components/ForecastCard'
 import { Container, Row, Col } from 'react-bootstrap'
 import axios from 'axios'
+import moment from 'moment'
 
 function App() {
   const [city, setCity] = useState('')
@@ -66,7 +67,7 @@ function App() {
 
   const convertTemp = (tempK) => {
     let tempF = (tempK - 273.15) * 1.80 + 32;
-    return tempF.toFixed(2)
+    return tempF.toFixed()
   }
 
   return (
@@ -88,12 +89,14 @@ function App() {
           <Col sm={8}>
             <WeatherCard
               {...weatherData}
+              locationTime={moment().utcOffset(weatherData?.timezone/60)}
               convertTemp={convertTemp}
             />
           </Col>
         </Row>
         <ForecastCard
           {...forecastData}
+          locationTime={moment().utcOffset(weatherData?.timezone/60)}
           convertTemp={convertTemp}
         />
       </Container>
