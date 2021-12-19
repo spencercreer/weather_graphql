@@ -1,10 +1,9 @@
 import { Card, Row, Col, Image } from 'react-bootstrap'
 import moment from 'moment'
 
-export default function WeatherCard({ name, weather, wind }) {
+export default function WeatherCard({ name, main, weather, wind, convertTemp }) {
 
     let iconLink = ''
-
     if (weather.length > 0) {
         iconLink = `http://openweathermap.org/img/wn/${weather[0]?.icon}@2x.png`
     }
@@ -14,7 +13,7 @@ export default function WeatherCard({ name, weather, wind }) {
             <Card.Body>
                 <Card.Text>{moment().format('LL')}</Card.Text>
                 <Card.Title>{name}</Card.Title>
-                <Card.Text>Temperature: F</Card.Text>
+                <Card.Text>Temperature: {convertTemp(main?.temp) + String.fromCharCode(176)} F</Card.Text>
                 <Card.Text>Humidity: %</Card.Text>
                 <Card.Text>Wind Speed: {wind?.speed} mph {wind?.deg} degrees</Card.Text>
                 <Card.Text>UV Index:</Card.Text>
@@ -26,6 +25,7 @@ export default function WeatherCard({ name, weather, wind }) {
 
 WeatherCard.defaultProps = {
     name: "",
+    main: {},
     weather: [],
     wind: {}
 }

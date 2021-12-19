@@ -64,6 +64,11 @@ function App() {
       })
   }
 
+  const convertTemp = (tempK) => {
+    let tempF = (tempK - 273.15) * 1.80 + 32;
+    return tempF.toFixed(2)
+  }
+
   return (
     <>
       <Header />
@@ -81,10 +86,16 @@ function App() {
             <SearchHistory />
           </Col>
           <Col sm={8}>
-            <WeatherCard {...weatherData} />
+            <WeatherCard
+              {...weatherData}
+              convertTemp={convertTemp}
+            />
           </Col>
         </Row>
-        <ForecastCard {...forecastData} />
+        <ForecastCard
+          {...forecastData}
+          convertTemp={convertTemp}
+        />
       </Container>
     </>
   );

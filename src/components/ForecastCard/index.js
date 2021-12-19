@@ -1,7 +1,7 @@
 import { Row, Col } from 'react-bootstrap'
 import DayCard from '../DayCard'
 
-export default function ForecastCard({ daily }) {
+export default function ForecastCard({ daily, convertTemp }) {
     let fiveDayForecast = daily.slice(0, 5)
     console.log('Five Day Forecast', fiveDayForecast)
     return (
@@ -11,6 +11,7 @@ export default function ForecastCard({ daily }) {
                     key={i}
                     index={i}
                     forecast={forecast}
+                    convertTemp={convertTemp}
                 />
             ))}
         </Row>
