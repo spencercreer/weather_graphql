@@ -5,19 +5,19 @@ export default function ForecastCard() {
     return (
         <Row>
             <Col md>
-                <DayCard />
+                <DayCard day={1}/>
             </Col>
             <Col md>
-                <DayCard />
+                <DayCard day={2} />
             </Col>
             <Col md>
-                <DayCard />
+                <DayCard day={3} />
             </Col>
             <Col md>
-                <DayCard />
+                <DayCard day={4} />
             </Col>
             <Col md>
-                <DayCard />
+                <DayCard day={5} />
             </Col>
         </Row>
     )

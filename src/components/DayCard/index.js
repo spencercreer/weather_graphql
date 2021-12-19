@@ -1,10 +1,11 @@
 import { Card, Image } from 'react-bootstrap'
+import moment from 'moment'
 
-export default function DayCard() {
+export default function DayCard({ day }) {
     return (
         <Card>
             <Card.Body>
-                <Card.Title></Card.Title>
+                <Card.Title>{moment().add(day, 'days').format('LL')}</Card.Title>
                 <Card.Text>Max. Temperature: F</Card.Text>
                 <Card.Text>Min. Temperature: F</Card.Text>
                 <Card.Text>Humidity: %</Card.Text>

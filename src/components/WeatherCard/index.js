@@ -1,4 +1,5 @@
 import { Card, Row, Col, Image } from 'react-bootstrap'
+import moment from 'moment'
 
 export default function WeatherCard({ name, weather, wind }) {
 
@@ -7,6 +8,7 @@ export default function WeatherCard({ name, weather, wind }) {
     return (
         <Card>
             <Card.Body>
+                <Card.Text>{moment().format('LL')}</Card.Text>
                 <Card.Title>{name}</Card.Title>
                 <Card.Text>Temperature: F</Card.Text>
                 <Card.Text>Humidity: %</Card.Text>
