@@ -23,6 +23,7 @@ function App() {
     } else {
       setCoords([33.4636012, -112.0535987])
     }
+    console.log(coords)
   }, [])
 
   const handleOnChange = event => {
@@ -31,10 +32,30 @@ function App() {
   }
 
   const handleSubmit = () => {
+    getWeather()
+  }
+
+  const getWeather = () => {
     axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=cb77ba3879d59e814a56609394606986`)
       .then(res => {
         console.log(res.data)
         setWeatherData(res.data)
+        let lat = res.data.coord.lat
+        let lon = res.data.coord.lon
+        setCoords([lat, lon])
+        getForecast(lat, lon)
+      })
+      .catch(err => {
+        if (err)
+          setError(true)
+      })
+  }
+
+  const getForecast = (lat, lon) => {
+    console.log(coords)
+    axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=cb77ba3879d59e814a56609394606986`)
+      .then(res => {
+        console.log(res.data)
       })
       .catch(err => {
         if (err)
@@ -43,26 +64,28 @@ function App() {
   }
 
   return (
-    <Container className="px-0" fluid>
+    <>
       <Header />
-      <Row>
-        <Col sm={4}>
-          <CityInput
-            handleOnChange={handleOnChange}
-            handleSubmit={handleSubmit}
-          />
-          <ErrorAlert
-            city={city}
-            error={error}
-          />
-          <SearchHistory />
-        </Col>
-        <Col sm={8}>
-          <WeatherCard {...weatherData} />
-        </Col>
-      </Row>
-      <ForecastCard />
-    </Container>
+      <Container className="px-0" fluid>
+        <Row>
+          <Col sm={4}>
+            <CityInput
+              handleOnChange={handleOnChange}
+              handleSubmit={handleSubmit}
+            />
+            <ErrorAlert
+              city={city}
+              error={error}
+            />
+            <SearchHistory />
+          </Col>
+          <Col sm={8}>
+            <WeatherCard {...weatherData} />
+          </Col>
+        </Row>
+        <ForecastCard />
+      </Container>
+    </>
   );
 }
 
