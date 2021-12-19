@@ -1,24 +1,22 @@
 import { Row, Col } from 'react-bootstrap'
 import DayCard from '../DayCard'
 
-export default function ForecastCard() {
+export default function ForecastCard({ daily }) {
+    let fiveDayForecast = daily.slice(0, 5)
+    console.log('Five Day Forecast', fiveDayForecast)
     return (
         <Row>
-            <Col md>
-                <DayCard day={1}/>
-            </Col>
-            <Col md>
-                <DayCard day={2} />
-            </Col>
-            <Col md>
-                <DayCard day={3} />
-            </Col>
-            <Col md>
-                <DayCard day={4} />
-            </Col>
-            <Col md>
-                <DayCard day={5} />
-            </Col>
+            {fiveDayForecast.map((forecast, i) => (
+                <DayCard
+                    key={i}
+                    index={i}
+                    forecast={forecast}
+                />
+            ))}
         </Row>
     )
+}
+
+ForecastCard.defaultProps = {
+    daily: [],
 }

@@ -13,6 +13,7 @@ function App() {
   const [coords, setCoords] = useState([])
   const [error, setError] = useState(false)
   const [weatherData, setWeatherData] = useState({})
+  const [forecastData, setForeCastData] = useState({})
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -38,7 +39,7 @@ function App() {
   const getWeather = () => {
     axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=cb77ba3879d59e814a56609394606986`)
       .then(res => {
-        console.log(res.data)
+        console.log('Weather Data', res.data)
         setWeatherData(res.data)
         let lat = res.data.coord.lat
         let lon = res.data.coord.lon
@@ -52,10 +53,10 @@ function App() {
   }
 
   const getForecast = (lat, lon) => {
-    console.log(coords)
     axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=cb77ba3879d59e814a56609394606986`)
       .then(res => {
-        console.log(res.data)
+        console.log('Forecast Data', res.data)
+        setForeCastData(res.data)
       })
       .catch(err => {
         if (err)
@@ -83,7 +84,7 @@ function App() {
             <WeatherCard {...weatherData} />
           </Col>
         </Row>
-        <ForecastCard />
+        <ForecastCard {...forecastData} />
       </Container>
     </>
   );
