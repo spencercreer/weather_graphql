@@ -10,11 +10,19 @@ import axios from 'axios'
 
 function App() {
   const [city, setCity] = useState('')
+  const [coords, setCoords] = useState([])
   const [error, setError] = useState(false)
   const [weatherData, setWeatherData] = useState({})
 
   useEffect(() => {
-
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        console.log(position)
+        setCoords([position.coords.latitude, position.coords.longitude])
+      });
+    } else {
+      setCoords([33.4636012, -112.0535987])
+    }
   }, [])
 
   const handleOnChange = event => {
