@@ -15,8 +15,10 @@ function App() {
   const [error, setError] = useState(false)
   const [weatherData, setWeatherData] = useState({})
   const [forecastData, setForeCastData] = useState({})
+  const [searchHistory, setSearchHistory] = useState([])
 
   useEffect(() => {
+    //get users geolocation or set coords to Phoenix
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
         console.log(position)
@@ -25,14 +27,10 @@ function App() {
     } else {
       setCoords([33.4636012, -112.0535987])
     }
-    console.log(coords)
-    const lat = coords[0]
-    const lon = coords[1]
-    // const getTheForecast = async () => {
-    //   const forecastData = await axios(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=cb77ba3879d59e814a56609394606986`)
-    //   console.log(forecastData)
-    // }
-    // getTheForecast()
+
+    //local storage search history
+    let citySearches = JSON.parse(localStorage.getItem('searchHistory')) || []
+    setSearchHistory(citySearches)
   }, [])
 
   const handleOnChange = event => {
@@ -53,6 +51,7 @@ function App() {
         let lon = res.data.coord.lon
         setCoords([lat, lon])
         getForecast(lat, lon)
+        storeCitySearch(res.data.name)
       })
       .catch(err => {
         if (err)
@@ -70,6 +69,17 @@ function App() {
         if (err)
           setError(true)
       })
+  }
+
+  const storeCitySearch = (city) => {
+    //check search history to ensure it is not a duplicate
+    let found = searchHistory.find(x => x === city)
+    if (!found) {
+      //store city search in local storage
+      searchHistory.push(city)
+      setSearchHistory(searchHistory)
+      localStorage.setItem('searchHistory', JSON.stringify(searchHistory))
+    }
   }
 
   const convertTemp = (tempK) => {
@@ -91,19 +101,21 @@ function App() {
               city={city}
               error={error}
             />
-            <SearchHistory />
+            <SearchHistory 
+              history={searchHistory}
+            />
           </Col>
           <Col sm={8}>
             <WeatherCard
               {...weatherData}
-              locationTime={moment().utcOffset(weatherData?.timezone/60)}
+              locationTime={moment().utcOffset(weatherData?.timezone / 60)}
               convertTemp={convertTemp}
             />
           </Col>
         </Row>
         <ForecastCard
           {...forecastData}
-          locationTime={moment().utcOffset(weatherData?.timezone/60)}
+          locationTime={moment().utcOffset(weatherData?.timezone / 60)}
           convertTemp={convertTemp}
         />
       </Container>

@@ -1,6 +1,7 @@
-export default function SearchHistory() {
+export default function SearchHistory({ history }) {
     return (
-        <div className="list-group cityList pl-0">
+        <div>
+            {history.map(city => <div className="list-group cityList pl-0">{city}</div>)}
         </div>
     )
 }
