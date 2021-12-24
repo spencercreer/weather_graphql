@@ -1,4 +1,5 @@
 import { InputGroup, FormControl, Button } from 'react-bootstrap'
+import PropTypes from 'prop-types'
 
 export default function CityInput({ handleOnChange, handleSubmit }) {
     return (
@@ -19,4 +20,9 @@ export default function CityInput({ handleOnChange, handleSubmit }) {
                 </div>
             </InputGroup>
     )
+}
+
+CityInput.propTypes = {
+    handleOnChange: PropTypes.func,
+    handleSubmit: PropTypes.func,
 }

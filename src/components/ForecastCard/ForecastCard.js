@@ -1,5 +1,6 @@
-import { Row, Col } from 'react-bootstrap'
-import DayCard from '../DayCard'
+import { Row } from 'react-bootstrap'
+import DayCard from '../DayCard/DayCard'
+import PropTypes from 'prop-types'
 
 export default function ForecastCard({ daily, locationTime, convertTemp }) {
     let fiveDayForecast = daily.slice(0, 5)
@@ -21,4 +22,10 @@ export default function ForecastCard({ daily, locationTime, convertTemp }) {
 
 ForecastCard.defaultProps = {
     daily: [],
+}
+
+ForecastCard.propTypes = {
+    daily: PropTypes.array,
+    locationTime: PropTypes.object,
+    convertTemp: PropTypes.func,
 }

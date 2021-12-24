@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react'
-import Header from './components/Header'
-import CityInput from './components/CityInput'
-import ErrorAlert from './components/ErrorAlert'
-import SearchHistory from './components/SearchHistory'
-import WeatherCard from './components/WeatherCard'
-import ForecastCard from './components/ForecastCard'
+import Header from './components/Header/Header'
+import CityInput from './components/CityInput/CityInput'
+import ErrorAlert from './components/ErrorAlert/ErrorAlert'
+import SearchHistory from './components/SearchHistory/SearchHistory'
+import WeatherCard from './components/WeatherCard/WeatherCard'
+import ForecastCard from './components/ForecastCard/ForecastCard'
 import { Container, Row, Col } from 'react-bootstrap'
 import axios from 'axios'
 import moment from 'moment'
@@ -26,6 +26,13 @@ function App() {
       setCoords([33.4636012, -112.0535987])
     }
     console.log(coords)
+    const lat = coords[0]
+    const lon = coords[1]
+    const getTheForecast = async () => {
+      const forecastData = await axios(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=cb77ba3879d59e814a56609394606986`)
+      console.log(forecastData)
+    }
+    getTheForecast()
   }, [])
 
   const handleOnChange = event => {
