@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 
 export default function ForecastCard({ daily, locationTime, convertTemp }) {
     let fiveDayForecast = daily.slice(0, 5)
-    console.log('Five Day Forecast', fiveDayForecast)
     return (
         <Row>
             {fiveDayForecast.map((forecast, i) => (

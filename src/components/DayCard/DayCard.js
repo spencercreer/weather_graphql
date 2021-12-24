@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import moment from 'moment'
 
 export default function DayCard({ index, forecast, locationTime, convertTemp }) {
-    console.log(typeof locationTime, locationTime)
     return (
         <Col md>
             <Card>

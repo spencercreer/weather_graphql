@@ -28,11 +28,11 @@ function App() {
     console.log(coords)
     const lat = coords[0]
     const lon = coords[1]
-    const getTheForecast = async () => {
-      const forecastData = await axios(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=cb77ba3879d59e814a56609394606986`)
-      console.log(forecastData)
-    }
-    getTheForecast()
+    // const getTheForecast = async () => {
+    //   const forecastData = await axios(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=cb77ba3879d59e814a56609394606986`)
+    //   console.log(forecastData)
+    // }
+    // getTheForecast()
   }, [])
 
   const handleOnChange = event => {
