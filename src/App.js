@@ -11,9 +11,8 @@ import moment from 'moment'
 
 function App() {
   const [city, setCity] = useState('')
-  const [coords, setCoords] = useState([])
+  const [coords, setCoords] = useState([0, 0])
   const [error, setError] = useState(false)
-  const [weatherData, setWeatherData] = useState({})
   const [forecastData, setForeCastData] = useState({})
   const [searchHistory, setSearchHistory] = useState([])
 
@@ -21,7 +20,6 @@ function App() {
     //get users geolocation or set coords to Phoenix
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
-        console.log(position)
         setCoords([position.coords.latitude, position.coords.longitude])
       });
     } else {
@@ -33,37 +31,36 @@ function App() {
     setSearchHistory(citySearches)
   }, [])
 
+  useEffect(() => {
+    axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${coords[0]}&lon=${coords[1]}&appid=cb77ba3879d59e814a56609394606986`)
+    .then(res => {
+      console.log('Forecast Data', res.data)
+      setForeCastData(res.data)
+    })
+    .catch(err => {
+      if (err)
+        setError(true)
+    })
+  }, [coords])
+
   const handleOnChange = event => {
     setCity(event.target.value)
     setError(false)
   }
 
-  const handleSubmit = () => {
-    getWeather()
+  const handleOnClick = event => {
+    console.log(event.target.value)
+    getWeather(event.target.value)
   }
 
-  const getWeather = () => {
-    axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=cb77ba3879d59e814a56609394606986`)
+  const getWeather = (search) => {
+    axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${search}&appid=cb77ba3879d59e814a56609394606986`)
       .then(res => {
-        console.log('Weather Data', res.data)
-        setWeatherData(res.data)
         let lat = res.data.coord.lat
         let lon = res.data.coord.lon
+        setCity(res.data.name)
         setCoords([lat, lon])
-        getForecast(lat, lon)
         storeCitySearch(res.data.name)
-      })
-      .catch(err => {
-        if (err)
-          setError(true)
-      })
-  }
-
-  const getForecast = (lat, lon) => {
-    axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=cb77ba3879d59e814a56609394606986`)
-      .then(res => {
-        console.log('Forecast Data', res.data)
-        setForeCastData(res.data)
       })
       .catch(err => {
         if (err)
@@ -94,8 +91,9 @@ function App() {
         <Row>
           <Col sm={4}>
             <CityInput
+              city={city}
               handleOnChange={handleOnChange}
-              handleSubmit={handleSubmit}
+              handleOnClick={handleOnClick}
             />
             <ErrorAlert
               city={city}
@@ -103,19 +101,21 @@ function App() {
             />
             <SearchHistory 
               history={searchHistory}
+              handleOnClick={handleOnClick}
             />
           </Col>
           <Col sm={8}>
             <WeatherCard
-              {...weatherData}
-              locationTime={moment().utcOffset(weatherData?.timezone / 60)}
+              city={city}
+              currentWeather={forecastData?.current}
+              locationTime={moment().utcOffset(forecastData?.timezone / 60)}
               convertTemp={convertTemp}
             />
           </Col>
         </Row>
         <ForecastCard
-          {...forecastData}
-          locationTime={moment().utcOffset(weatherData?.timezone / 60)}
+          forecastData={forecastData?.daily}
+          locationTime={moment().utcOffset(forecastData?.timezone / 60)}
           convertTemp={convertTemp}
         />
       </Container>
