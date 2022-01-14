@@ -150,6 +150,7 @@ function App() {
               currentWeather={forecastData?.current}
               locationTime={moment().utcOffset(forecastData?.timezone_offset / 60)}
               convertTemp={convertTemp}
+              tempUnit={tempUnit}
             />
           </Col>
         </Row>
@@ -157,6 +158,7 @@ function App() {
           forecastData={forecastData?.daily}
           locationTime={moment().utcOffset(forecastData?.timezone_offset / 60)}
           convertTemp={convertTemp}
+          tempUnit={tempUnit}
         />
       </Container>
     </>
