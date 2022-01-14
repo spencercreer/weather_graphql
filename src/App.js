@@ -5,7 +5,7 @@ import ErrorAlert from './components/ErrorAlert/ErrorAlert'
 import SearchHistory from './components/SearchHistory/SearchHistory'
 import WeatherCard from './components/WeatherCard/WeatherCard'
 import ForecastCard from './components/ForecastCard/ForecastCard'
-import { Container, Row, Col } from 'react-bootstrap'
+import { Container, Row, Col, Form } from 'react-bootstrap'
 import axios from 'axios'
 import moment from 'moment'
 
@@ -16,6 +16,7 @@ function App() {
   const [error, setError] = useState(false)
   const [forecastData, setForeCastData] = useState({})
   const [searchHistory, setSearchHistory] = useState([])
+  const [tempUnit, setTempUnit] = useState('F')
 
   useEffect(() => {
     let mounted = true
@@ -100,14 +101,32 @@ function App() {
     }
   }
 
+  const handleUnitChange = () => {
+    const newTempUnit = tempUnit === 'F' ? 'C' : 'F'
+    setTempUnit(newTempUnit)
+  }
+
   const convertTemp = (tempK) => {
-    let tempF = (tempK - 273.15) * 1.80 + 32;
-    return tempF.toFixed()
+    let convertedTemp
+
+    if (tempUnit === 'F') {
+      convertedTemp = (tempK - 273.15) * 1.80 + 32;
+    } else if (tempUnit === 'C') {
+      convertedTemp = (tempK - 273.15)
+    }
+
+    return convertedTemp.toFixed()
   }
 
   return (
     <>
       <Header />
+      <Form>
+        <Form.Switch
+          label={tempUnit}
+          onChange={handleUnitChange}
+        />
+      </Form>
       <Container className="px-0" fluid>
         <Row>
           <Col sm={4}>
