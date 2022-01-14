@@ -11,36 +11,57 @@ import moment from 'moment'
 
 function App() {
   const [city, setCity] = useState('')
+  const [location, setLocation] = useState({})
   const [coords, setCoords] = useState([0, 0])
   const [error, setError] = useState(false)
   const [forecastData, setForeCastData] = useState({})
   const [searchHistory, setSearchHistory] = useState([])
 
   useEffect(() => {
-    //get users geolocation or set coords to Phoenix
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        setCoords([position.coords.latitude, position.coords.longitude])
-      });
-    } else {
-      setCoords([33.4636012, -112.0535987])
+    let mounted = true
+
+    if (mounted) {
+      //get users geolocation or set coords to Phoenix
+      let lat, lon
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((position) => {
+          console.log(position)
+          lat = position.coords.latitude
+          lon = position.coords.longitude
+          setCoords([lat, lon])
+        });
+      } else {
+        lat = 33.4
+        lon = -112.1
+        setCoords([lat, lon])
+      }
+
+      //local storage search history
+      const citySearches = JSON.parse(localStorage.getItem('searchHistory')) || []
+      setSearchHistory(citySearches)
     }
 
-    //local storage search history
-    let citySearches = JSON.parse(localStorage.getItem('searchHistory')) || []
-    setSearchHistory(citySearches)
+    return () => mounted = false
   }, [])
 
   useEffect(() => {
+    axios.get(`http://www.mapquestapi.com/geocoding/v1/reverse?key=4vnji15LY55BpLWMGKkSMcsBGz5hkuAM&location=${coords[0]},${coords[1]}&includeRoadMetadata=true&includeNearestIntersection=true`)
+      .then(res => {
+        setLocation({
+          country: res.data.results[0].locations[0].adminArea1,
+          state: res.data.results[0].locations[0].adminArea3,
+          city: res.data.results[0].locations[0].adminArea5,
+        })
+      })
     axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${coords[0]}&lon=${coords[1]}&appid=cb77ba3879d59e814a56609394606986`)
-    .then(res => {
-      console.log('Forecast Data', res.data)
-      setForeCastData(res.data)
-    })
-    .catch(err => {
-      if (err)
-        setError(true)
-    })
+      .then(res => {
+        console.log('Forecast Data', res.data)
+        setForeCastData(res.data)
+      })
+      .catch(err => {
+        if (err)
+          setError(true)
+      })
   }, [coords])
 
   const handleOnChange = event => {
@@ -48,18 +69,18 @@ function App() {
     setError(false)
   }
 
-  const handleOnClick = event => {
-    console.log(event.target.value)
-    getWeather(event.target.value)
+  const handleSearch = () => {
+    getCoords(city)
   }
 
-  const getWeather = (search) => {
+  const handleOnClick = event => {
+    getCoords(event.target.value)
+  }
+
+  const getCoords = (search) => {
     axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${search}&appid=cb77ba3879d59e814a56609394606986`)
       .then(res => {
-        let lat = res.data.coord.lat
-        let lon = res.data.coord.lon
-        setCity(res.data.name)
-        setCoords([lat, lon])
+        setCoords([res.data.coord.lat, res.data.coord.lon])
         storeCitySearch(res.data.name)
       })
       .catch(err => {
@@ -91,31 +112,31 @@ function App() {
         <Row>
           <Col sm={4}>
             <CityInput
-              city={city}
+              location={location}
               handleOnChange={handleOnChange}
-              handleOnClick={handleOnClick}
+              handleSearch={handleSearch}
             />
             <ErrorAlert
-              city={city}
+              location={location}
               error={error}
             />
-            <SearchHistory 
+            <SearchHistory
               history={searchHistory}
               handleOnClick={handleOnClick}
             />
           </Col>
           <Col sm={8}>
             <WeatherCard
-              city={city}
+              location={location}
               currentWeather={forecastData?.current}
-              locationTime={moment().utcOffset(forecastData?.timezone / 60)}
+              locationTime={moment().utcOffset(forecastData?.timezone_offset / 60)}
               convertTemp={convertTemp}
             />
           </Col>
         </Row>
         <ForecastCard
           forecastData={forecastData?.daily}
-          locationTime={moment().utcOffset(forecastData?.timezone / 60)}
+          locationTime={moment().utcOffset(forecastData?.timezone_offset / 60)}
           convertTemp={convertTemp}
         />
       </Container>

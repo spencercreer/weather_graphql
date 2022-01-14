@@ -2,9 +2,9 @@ import { Card, Row, Col, Image } from 'react-bootstrap'
 import moment from 'moment'
 import PropTypes from 'prop-types'
 
-export default function WeatherCard({ city, currentWeather, locationTime, convertTemp }) {
+export default function WeatherCard({ location, currentWeather, locationTime, convertTemp }) {
 
-    console.log(currentWeather)
+    // console.log(currentWeather)
     const weather = currentWeather?.weather || []
 
     let iconLink = ''
@@ -16,7 +16,7 @@ export default function WeatherCard({ city, currentWeather, locationTime, conver
         <Card>
             <Card.Body>
                 <Card.Text>{moment(locationTime).format('LLLL')}</Card.Text>
-                <Card.Title>{city}, {currentWeather?.sys?.country}</Card.Title>
+                <Card.Title>{location?.city}, {location?.country}</Card.Title>
                 <Image src={iconLink} style={{ display: "inline-block", height: "50px", width: "50px" }} rounded />
                 <Card.Text>{convertTemp(currentWeather?.main?.temp) + String.fromCharCode(176)} F</Card.Text>
                 <Card.Text>Humidity: {currentWeather?.main?.humidity}%</Card.Text>

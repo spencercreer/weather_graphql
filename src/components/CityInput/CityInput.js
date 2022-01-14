@@ -1,10 +1,10 @@
 import { InputGroup, FormControl, Button } from 'react-bootstrap'
 import PropTypes from 'prop-types'
 
-export default function CityInput({ city, handleOnChange, handleOnClick, getWeather }) {
+export default function CityInput({ location, handleOnChange, handleSearch }) {
     const handleKeyUp = event => {
         if (event.keyCode === 13) {
-            getWeather()
+            handleSearch()
         }
     }
 
@@ -22,8 +22,8 @@ export default function CityInput({ city, handleOnChange, handleOnClick, getWeat
                     id="search-btn"
                     className="fas fa-search"
                     variant="outline-primary"
-                    onClick={handleOnClick}
-                    value={city}
+                    onClick={handleSearch}
+                    value={location}
                 />
             </div>
         </InputGroup>
