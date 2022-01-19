@@ -121,13 +121,13 @@ function App() {
   return (
     <>
       <Header />
+      <Container className='px-5' fluid>
       <Form>
         <Form.Switch
-          label={tempUnit}
+          label={`${String.fromCharCode(176)}${tempUnit}`}
           onChange={handleUnitChange}
         />
       </Form>
-      <Container className="px-0" fluid>
         <Row>
           <Col sm={4}>
             <CityInput
@@ -144,7 +144,7 @@ function App() {
               handleOnClick={handleOnClick}
             />
           </Col>
-          <Col sm={8}>
+          <Col sm={8} className='px-1'>
             <WeatherCard
               location={location}
               currentWeather={forecastData?.current}

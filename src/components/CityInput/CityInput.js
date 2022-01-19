@@ -9,23 +9,21 @@ export default function CityInput({ location, handleOnChange, handleSearch }) {
     }
 
     return (
-        <InputGroup className="mb-3">
+        <InputGroup className='mb-3'>
             <FormControl
-                type="text"
-                id="city-input"
-                placeholder="Search City"
+                type='text'
+                id='city-input'
+                placeholder='Search City'
                 onChange={handleOnChange}
                 onKeyUp={handleKeyUp}
             />
-            <div className="input-group-append">
-                <Button
-                    id="search-btn"
-                    className="fas fa-search"
-                    variant="outline-primary"
-                    onClick={handleSearch}
-                    value={location}
-                />
-            </div>
+            <Button
+                id='search-btn'
+                className='fas fa-search'
+                variant='outline-primary'
+                onClick={handleSearch}
+                value={location}
+            />
         </InputGroup>
     )
 }

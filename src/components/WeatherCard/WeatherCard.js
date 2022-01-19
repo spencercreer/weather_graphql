@@ -2,29 +2,19 @@ import { Card, Row, Col, Image } from 'react-bootstrap'
 import moment from 'moment'
 import PropTypes from 'prop-types'
 
-export default function WeatherCard({ location, currentWeather, locationTime, convertTemp }) {
+export default function WeatherCard({ location, currentWeather, locationTime, convertTemp, tempUnit }) {
 
-    console.log(currentWeather)
-    const weather = currentWeather?.weather || []
-
-    let iconLink = ''
-    if (weather.length > 0) {
-        iconLink = `http://openweathermap.org/img/wn/${weather[0]?.icon}@2x.png`
-    }
+    const iconLink = currentWeather?.weather[0]?.icon ? `http://openweathermap.org/img/wn/${currentWeather.weather[0]?.icon}@2x.png`: ''
 
     return (
         <Card>
             <Card.Body>
                 <Card.Text>{moment(locationTime).format('LLLL')}</Card.Text>
-                <Card.Title>{location?.city}, {location?.country}</Card.Title>
-                <Row>
-                    <Col xs={2}>
-                        <Card.Text>{convertTemp(currentWeather?.temp) + String.fromCharCode(176)} F</Card.Text>
-                    </Col>
-                    <Col>
-                        <Image src={iconLink} style={{ display: "inline-block", height: "50px", width: "50px" }} rounded />
-                    </Col>
-                </Row>
+                <Card.Title>{location?.city}, {location?.country}
+                    <Image src={iconLink} style={{ display: 'inline-block', height: '60px', width: '60px' }} rounded />
+                </Card.Title>
+                <Card.Text>{convertTemp(currentWeather?.temp) + String.fromCharCode(176)} {tempUnit}</Card.Text>
+
                 <Card.Text>Humidity: {currentWeather?.humidity}%</Card.Text>
                 <Card.Text>Wind Speed: {currentWeather?.wind?.speed} mph {currentWeather?.wind?.deg} degrees</Card.Text>
                 <Card.Text>UV Index:</Card.Text>
