@@ -1,7 +1,7 @@
 import { InputGroup, FormControl, Button } from 'react-bootstrap'
 import PropTypes from 'prop-types'
 
-export default function CityInput({ location, handleOnChange, handleSearch }) {
+export default function CityInput({ city, handleOnChange, handleSearch }) {
     const handleKeyUp = event => {
         if (event.keyCode === 13) {
             handleSearch()
@@ -14,6 +14,7 @@ export default function CityInput({ location, handleOnChange, handleSearch }) {
                 type='text'
                 id='city-input'
                 placeholder='Search City'
+                value={city}
                 onChange={handleOnChange}
                 onKeyUp={handleKeyUp}
             />
@@ -22,7 +23,6 @@ export default function CityInput({ location, handleOnChange, handleSearch }) {
                 className='fas fa-search'
                 variant='outline-primary'
                 onClick={handleSearch}
-                value={location}
             />
         </InputGroup>
     )

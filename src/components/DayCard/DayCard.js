@@ -1,7 +1,6 @@
 import { Col, Card, Image, Alert } from 'react-bootstrap'
 import PropTypes from 'prop-types'
 import moment from 'moment'
-import './style.css'
 
 export default function DayCard({ index, forecast, locationTime, convertTemp, tempUnit }) {
 

@@ -5,6 +5,7 @@ import ErrorAlert from './components/ErrorAlert/ErrorAlert'
 import SearchHistory from './components/SearchHistory/SearchHistory'
 import WeatherCard from './components/WeatherCard/WeatherCard'
 import ForecastCard from './components/ForecastCard/ForecastCard'
+import Footer from './components/Footer/Footer'
 import { Container, Row, Col, Form } from 'react-bootstrap'
 import axios from 'axios'
 import moment from 'moment'
@@ -72,6 +73,7 @@ function App() {
 
   const handleSearch = () => {
     getCoords(city)
+    setCity('')
   }
 
   const handleOnClick = event => {
@@ -95,7 +97,10 @@ function App() {
     let found = searchHistory.find(x => x === city)
     if (!found) {
       //store city search in local storage
-      searchHistory.push(city)
+      searchHistory.unshift(city)
+      if (searchHistory.length > 6) {
+        searchHistory.pop()
+      }
       setSearchHistory(searchHistory)
       localStorage.setItem('searchHistory', JSON.stringify(searchHistory))
     }
@@ -131,7 +136,7 @@ function App() {
         <Row>
           <Col sm={4}>
             <CityInput
-              location={location}
+              city={city}
               handleOnChange={handleOnChange}
               handleSearch={handleSearch}
             />
@@ -161,6 +166,7 @@ function App() {
           tempUnit={tempUnit}
         />
       </Container>
+      <Footer />
     </>
   );
 }

@@ -23,7 +23,7 @@ export default function WeatherCard({ location, currentWeather, locationTime, co
         uviAlert = 'danger'
 
     return (
-        <Card>
+        <Card className='mb-2'>
             <Card.Body>
                 <Card.Text>{moment(locationTime).format('LLLL')}</Card.Text>
                 <Card.Title>{location?.city}, {location?.country}
