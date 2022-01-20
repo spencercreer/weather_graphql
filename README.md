@@ -1,5 +1,5 @@
 <p>
-<img src="./assets/icons/ms-icon-150x150.png" align="right" width="50">
+<img src="./public/ms-icon-150x150.png" align="right" width="50">
 </p>
 
 # Weather Dashboard
@@ -28,8 +28,8 @@ Repository: [https://github.com/spencercreer/weather_dashboard](https://github.c
 
 
 ## Animation
-The following image demonstrates the application appearance:
-![Weather Dashboard animation](./assets/weather_dashboard.PNG)
+The following image demonstrates the application appearance:<br>
+![Weather Dashboard animation](./public/weather_dashboard.PNG)
 
 ## Instructions
 The user may search the weather of a city by entering the city name in the input element. A list of searched cities is created and the user may recall previously searched weather forecasts by clicking a list element.

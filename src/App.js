@@ -56,7 +56,7 @@ function App() {
       })
     axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${coords[0]}&lon=${coords[1]}&appid=cb77ba3879d59e814a56609394606986`)
       .then(res => {
-\        setForeCastData(res.data)
+        setForeCastData(res.data)
       })
       .catch(err => {
         if (err)
