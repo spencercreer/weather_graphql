@@ -40,19 +40,15 @@ export default function WeatherCard({ location, currentWeather, locationTime, co
 }
 
 WeatherCard.defaultProps = {
-    name: "",
-    current: {},
-    sys: {},
-    timezone: 0,
-    weather: [],
-    wind: {}
+    location: {},
+    locationTime: {},
+    tempUnit: '',
 }
 
 WeatherCard.propTypes = {
-    name: PropTypes.string,
-    main: PropTypes.object,
-    sys: PropTypes.object,
-    timezone: PropTypes.number,
-    weather: PropTypes.array,
-    wind: PropTypes.object,
+    location: PropTypes.object,
+    currentWeather: PropTypes.object,
+    locationTime: PropTypes.object,
+    convertTemp: PropTypes.func,
+    tempUnit: PropTypes.string,
 }

@@ -49,4 +49,5 @@ DayCard.propTypes = {
     forecast: PropTypes.object,
     locationTime: PropTypes.object,
     convertTemp: PropTypes.func,
+    tempUnit: PropTypes.string,
 }

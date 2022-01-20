@@ -29,6 +29,7 @@ export default function CityInput({ city, handleOnChange, handleSearch }) {
 }
 
 CityInput.propTypes = {
+    city: PropTypes.string,
     handleOnChange: PropTypes.func,
     handleSubmit: PropTypes.func,
 }

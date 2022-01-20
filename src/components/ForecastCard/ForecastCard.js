@@ -29,4 +29,5 @@ ForecastCard.propTypes = {
     forecastData: PropTypes.array,
     locationTime: PropTypes.object,
     convertTemp: PropTypes.func,
+    tempUnit: PropTypes.string,
 }
