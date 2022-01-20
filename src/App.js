@@ -47,7 +47,7 @@ function App() {
   }, [])
 
   useEffect(() => {
-    axios.get(`http://www.mapquestapi.com/geocoding/v1/reverse?key=4vnji15LY55BpLWMGKkSMcsBGz5hkuAM&location=${coords[0]},${coords[1]}&includeRoadMetadata=true&includeNearestIntersection=true`)
+    axios.get(`https://www.mapquestapi.com/geocoding/v1/reverse?key=4vnji15LY55BpLWMGKkSMcsBGz5hkuAM&location=${coords[0]},${coords[1]}&includeRoadMetadata=true&includeNearestIntersection=true`)
       .then(res => {
         setLocation({
           country: res.data.results[0].locations[0].adminArea1,
