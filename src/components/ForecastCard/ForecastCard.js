@@ -3,7 +3,6 @@ import DayCard from '../DayCard/DayCard'
 import PropTypes from 'prop-types'
 
 export default function ForecastCard({ forecastData, locationTime, convertTemp, tempUnit }) {
-    // console.log(forecastData)
     let fiveDayForecast = forecastData.slice(0, 5)
     return (
         <Row>

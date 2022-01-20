@@ -27,7 +27,6 @@ function App() {
       let lat, lon
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((position) => {
-          console.log(position)
           lat = position.coords.latitude
           lon = position.coords.longitude
           setCoords([lat, lon])
@@ -57,8 +56,7 @@ function App() {
       })
     axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${coords[0]}&lon=${coords[1]}&appid=cb77ba3879d59e814a56609394606986`)
       .then(res => {
-        console.log('Forecast Data', res.data)
-        setForeCastData(res.data)
+\        setForeCastData(res.data)
       })
       .catch(err => {
         if (err)
