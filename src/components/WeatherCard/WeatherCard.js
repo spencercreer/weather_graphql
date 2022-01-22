@@ -1,17 +1,25 @@
-import { Card, Image, Alert } from 'react-bootstrap'
+import { Card, Image, Alert, Spinner } from 'react-bootstrap'
 import moment from 'moment'
 import PropTypes from 'prop-types'
 
-export default function WeatherCard({ location, currentWeather, locationTime, convertTemp, tempUnit }) {
+export default function WeatherCard({ location, currentWeather, locationTime, convertTemp, tempUnit, loading }) {
 
-    const windDir = currentWeather?.wind_deg-43 || -43
+    if (loading) {
+        return (
+            <Card className='mb-2 h-100' >
+                <Spinner animation="border" variant="primary" />
+            </Card>
+        )
+    }
+
+    const windDir = currentWeather?.wind_deg - 43 || -43
     const styles = {
         transform: `rotate(${windDir}deg)`,
         display: 'inline-block',
         fontSize: '10px'
     };
 
-    const iconLink = currentWeather?.weather[0]?.icon ? `http://openweathermap.org/img/wn/${currentWeather.weather[0]?.icon}@2x.png`: ''
+    const iconLink = currentWeather?.weather[0]?.icon ? `http://openweathermap.org/img/wn/${currentWeather.weather[0]?.icon}@2x.png` : ''
 
     let uviAlert = ''
     const uvi = currentWeather?.uvi || 0
@@ -32,7 +40,7 @@ export default function WeatherCard({ location, currentWeather, locationTime, co
                 <Card.Text>{convertTemp(currentWeather?.temp) + String.fromCharCode(176)} {tempUnit}</Card.Text>
 
                 <Card.Text>Humidity: {currentWeather?.humidity}%</Card.Text>
-                <Card.Text><span style={{marginRight: '3px'}}>Wind Speed: {currentWeather?.wind_speed}mph</span><span style={styles}><i className="fas fa-location-arrow"></i></span></Card.Text>
+                <Card.Text><span style={{ marginRight: '3px' }}>Wind Speed: {currentWeather?.wind_speed}mph</span><span style={styles}><i className="fas fa-location-arrow"></i></span></Card.Text>
                 <Alert className='p-0' variant={uviAlert}>UV Index: {uvi}</Alert>
             </Card.Body>
         </Card>
@@ -51,4 +59,5 @@ WeatherCard.propTypes = {
     locationTime: PropTypes.object,
     convertTemp: PropTypes.func,
     tempUnit: PropTypes.string,
+    loading: PropTypes.bool
 }

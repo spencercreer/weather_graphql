@@ -6,7 +6,7 @@ import SearchHistory from './components/SearchHistory/SearchHistory'
 import WeatherCard from './components/WeatherCard/WeatherCard'
 import ForecastCard from './components/ForecastCard/ForecastCard'
 import Footer from './components/Footer/Footer'
-import { Container, Row, Col, Form } from 'react-bootstrap'
+import { Container, Row, Col, Form, Spinner } from 'react-bootstrap'
 import axios from 'axios'
 import moment from 'moment'
 
@@ -18,6 +18,7 @@ function App() {
   const [forecastData, setForeCastData] = useState({})
   const [searchHistory, setSearchHistory] = useState([])
   const [tempUnit, setTempUnit] = useState('F')
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     let mounted = true
@@ -57,6 +58,7 @@ function App() {
     axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${coords[0]}&lon=${coords[1]}&appid=cb77ba3879d59e814a56609394606986`)
       .then(res => {
         setForeCastData(res.data)
+        setLoading(false)
       })
       .catch(err => {
         if (err)
@@ -75,6 +77,7 @@ function App() {
   }
 
   const handleOnClick = event => {
+    setLoading(true)
     getCoords(event.target.value)
   }
 
@@ -154,6 +157,7 @@ function App() {
               locationTime={moment().utcOffset(forecastData?.timezone_offset / 60)}
               convertTemp={convertTemp}
               tempUnit={tempUnit}
+              loading={loading}
             />
           </Col>
         </Row>
@@ -162,6 +166,7 @@ function App() {
           locationTime={moment().utcOffset(forecastData?.timezone_offset / 60)}
           convertTemp={convertTemp}
           tempUnit={tempUnit}
+          loading={loading}
         />
       </Container>
       <Footer />

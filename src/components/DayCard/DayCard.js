@@ -2,9 +2,18 @@ import { Col, Card, Image, Alert } from 'react-bootstrap'
 import PropTypes from 'prop-types'
 import moment from 'moment'
 
-export default function DayCard({ index, forecast, locationTime, convertTemp, tempUnit }) {
+export default function DayCard({ index, forecast, locationTime, convertTemp, tempUnit, loading }) {
 
-    const windDir = forecast?.wind_deg-43 || -43
+    if (loading) {
+        return (
+            <Col md className='px-1'>
+                <Card>
+                </Card>
+            </Col>
+        )
+    }
+
+    const windDir = forecast?.wind_deg - 43 || -43
     const styles = {
         transform: `rotate(${windDir}deg)`,
         display: 'inline-block',
