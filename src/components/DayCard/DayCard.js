@@ -4,14 +4,16 @@ import moment from 'moment'
 
 export default function DayCard({ index, forecast, locationTime, convertTemp, tempUnit, loading }) {
 
-    if (loading) {
-        return (
-            <Col md className='px-1'>
-                <Card>
-                </Card>
-            </Col>
-        )
-    }
+    // if (loading) {
+    //     return (
+    //         <Col md className='px-1'>
+    //             <Card>
+    //                 <div style={{ height: '311px' }}>
+    //                 </div>
+    //             </Card>
+    //         </Col>
+    //     )
+    // }
 
     const windDir = forecast?.wind_deg - 43 || -43
     const styles = {
@@ -20,7 +22,7 @@ export default function DayCard({ index, forecast, locationTime, convertTemp, te
         fontSize: '10px',
     };
 
-    const iconLink = forecast?.weather[0]?.icon ? `http://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png` : ''
+    const iconLink = forecast?.weather[0]?.icon ? `http://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png` : 'http://openweathermap.org/img/wn/03n@2x.png'
 
     let uviAlert = ''
     const uvi = forecast?.uvi || 0

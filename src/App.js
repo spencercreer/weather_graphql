@@ -6,14 +6,14 @@ import SearchHistory from './components/SearchHistory/SearchHistory'
 import WeatherCard from './components/WeatherCard/WeatherCard'
 import ForecastCard from './components/ForecastCard/ForecastCard'
 import Footer from './components/Footer/Footer'
-import { Container, Row, Col, Form, Spinner } from 'react-bootstrap'
+import { Container, Row, Col, Form } from 'react-bootstrap'
 import axios from 'axios'
 import moment from 'moment'
 
 function App() {
   const [city, setCity] = useState('')
-  const [location, setLocation] = useState({})
-  const [coords, setCoords] = useState([0, 0])
+  const [location, setLocation] = useState({ country: 'US', state: 'AZ', city: 'Phoenix' })
+  const [coords, setCoords] = useState([33.4, -112.1])
   const [error, setError] = useState(false)
   const [forecastData, setForeCastData] = useState({})
   const [searchHistory, setSearchHistory] = useState([])
