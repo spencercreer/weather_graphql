@@ -2,11 +2,11 @@
 <img src="./public/ms-icon-150x150.png" align="right" width="50">
 </p>
 
-# Weather Dashboard
+# Weather GraphQL
 ![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)
 
 ## Description
-OpenWeather API weather application.
+A React OpenWeather application.
 
 This application retrieves weather data from the OpenWeather API and displays it to the user. It displays the current and 5-day forecasts for a searched city. The current forecast includes the current temperature, humidity, wind speed and UV index. The UV index indicates whether conditions are favorable, moderate, or severe.
 
@@ -31,6 +31,21 @@ Repository: [https://github.com/spencercreer/weather_dashboard](https://github.c
 The following image demonstrates the application appearance:<br>
 ![Weather Dashboard animation](./public/weather_dashboard.PNG)
 
+## Installation
+This application utilizes the following dependencies:
+
+ * axios
+ * bootstrap
+ * moment
+ * react
+ * react-bootstrap
+
+To install necessary dependencies, run the following command:
+
+  ```
+  npm install
+  ```
+
 ## Instructions
 The user may search the weather of a city by entering the city name in the input element. A list of searched cities is created and the user may recall previously searched weather forecasts by clicking a list element.
 
@@ -38,10 +53,8 @@ The user may search the weather of a city by entering the city name in the input
 Please submit a PR if you would like to contribute.
 
 ## Technologies
- * JavaScript
- * HTML
+ * React
  * Bootstrap
- * jQuery
 
 ## APIs
 The application utilizes the following APIs:
