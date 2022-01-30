@@ -18,9 +18,7 @@ const CurrentForecast = new GraphQLObjectType({
         uvi: { type: GraphQLFloat },
         wind_speed: { type: GraphQLFloat },
         wind_deg: { type: GraphQLInt },
-        // weather: [{
-        //     icon: GraphQLString
-        // }]
+        weather: { type: new GraphQLList(WeatherIcon) }
     })
 })
 
@@ -31,9 +29,7 @@ const DailyForecast = new GraphQLObjectType({
         humidity: { type: GraphQLInt },
         wind_speed: { type: GraphQLFloat },
         wind_deg: { type: GraphQLInt },
-        // weather: [{
-        //     icon: GraphQLString
-        // }]
+        weather: { type: new GraphQLList(WeatherIcon) },
         uvi: { type: GraphQLFloat },
     })
 })
@@ -43,6 +39,13 @@ const DailyTemp = new GraphQLObjectType({
     fields: () => ({
         min: { type: GraphQLFloat },
         max: { type: GraphQLFloat }
+    })
+})
+
+const WeatherIcon = new GraphQLObjectType({
+    name: 'WeatherIcon',
+    fields: () => ({
+        icon: { type: GraphQLString }
     })
 })
 
