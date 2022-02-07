@@ -166,11 +166,10 @@ function App() {
           </Col>
         </Row>
         <ForecastCard
-          forecastData={forecastData?.daily}
+          coords={coords}
           locationTime={moment().utcOffset(forecastData?.timezone_offset / 60)}
           convertTemp={convertTemp}
           tempUnit={tempUnit}
-          loading={loading}
         />
       </Container>
       <Footer />

@@ -2,6 +2,8 @@ import { Col, Card, Image, Alert } from 'react-bootstrap'
 import PropTypes from 'prop-types'
 import moment from 'moment'
 
+const { Title, Body, Text } = Card
+
 export default function DayCard({ index, forecast, locationTime, convertTemp, tempUnit, loading }) {
 
     // if (loading) {
@@ -36,16 +38,16 @@ export default function DayCard({ index, forecast, locationTime, convertTemp, te
     return (
         <Col md className='px-1'>
             <Card>
-                <Card.Body>
-                    <Card.Title>{moment(locationTime).add(index, 'days').format('dddd')}</Card.Title>
-                    <Card.Text>{convertTemp(forecast?.temp.min)}/{convertTemp(forecast?.temp.max) + String.fromCharCode(176)} {tempUnit}
+                <Body>
+                    <Title>{moment(locationTime).add(index, 'days').format('dddd')}</Title>
+                    <Text>{convertTemp(forecast?.temp.min)}/{convertTemp(forecast?.temp.max) + String.fromCharCode(176)} {tempUnit}
                         <Image src={iconLink} style={{ display: 'inline-block', height: '35px', width: '35px' }} rounded />
-                    </Card.Text>
-                    <Card.Text>Humidity: {forecast?.humidity}%</Card.Text>
-                    <Card.Text>Wind: {forecast?.wind_speed}mph  <span style={styles}><i className="fas fa-location-arrow"></i></span>
-                    </Card.Text>
+                    </Text>
+                    <Text>Humidity: {forecast?.humidity}%</Text>
+                    <Text>Wind: {forecast?.wind_speed}mph  <span style={styles}><i className="fas fa-location-arrow"></i></span>
+                    </Text>
                     <Alert className='p-0' variant={uviAlert}>UV Index: {uvi}</Alert>
-                </Card.Body>
+                </Body>
             </Card>
         </Col>
     )
