@@ -55,8 +55,8 @@ const RootQuery = new GraphQLObjectType({
         weather: {
             type: Weather,
             args: {
-                lat: { type: GraphQLInt },
-                lon: { type: GraphQLInt }
+                lat: { type: GraphQLFloat },
+                lon: { type: GraphQLFloat }
             },
             resolve(parent, args) {
                 return axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${args.lat}&lon=${args.lon}&appid=cb77ba3879d59e814a56609394606986`)
