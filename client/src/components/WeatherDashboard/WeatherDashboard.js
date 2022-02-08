@@ -28,48 +28,56 @@ const LOCATION_QUERY = gql`
 const WeatherDashboard = () => {
     const [coords, setCoords] = useState({ lat: 33.4, lon: -112.1 })
 
-    const [city, setCity] = useState('')
-    const [location, setLocation] = useState({ country: 'US', state: 'AZ', city: 'Phoenix' })
-    const [error, setError] = useState(false)
+    // const [city, setCity] = useState('')
+    // const [location, setLocation] = useState({ country: 'US', state: 'AZ', city: 'Phoenix' })
+    // const [error, setError] = useState(false)
     const [forecastData, setForeCastData] = useState({})
     const [searchHistory, setSearchHistory] = useState([])
     const [tempUnit, setTempUnit] = useState('F')
-    const [loading, setLoading] = useState(true)
-    
-    const {   data } = useQuery(LOCATION_QUERY, {
-        variables: { lat: 113, lon: 12 }
+    // const [loading, setLoading] = useState(true)
+
+    const { loading, error, data } = useQuery(LOCATION_QUERY, {
+        variables: { lat: coords.lat, lon: coords.lon }
     })
-    console.log(data)
+
+    let location = {}
+
+    if (data) {
+        const country = data.location.results[0].locations[0].adminArea1
+        const state = data.location.results[0].locations[0].adminArea3
+        const city = data.location.results[0].locations[0].adminArea5
+        location = { country, state, city }
+    }
 
 
-    useEffect(() => {
-        axios.get(`https://www.mapquestapi.com/geocoding/v1/reverse?key=4vnji15LY55BpLWMGKkSMcsBGz5hkuAM&location=${coords[0]},${coords[1]}&includeRoadMetadata=true&includeNearestIntersection=true`)
-          .then(res => {
-            setLocation({
-              country: res.data.results[0].locations[0].adminArea1,
-              state: res.data.results[0].locations[0].adminArea3,
-              city: res.data.results[0].locations[0].adminArea5,
-            })
-          })
-        axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${coords[0]}&lon=${coords[1]}&appid=cb77ba3879d59e814a56609394606986`)
-          .then(res => {
-            setForeCastData(res.data)
-            setLoading(false)
-          })
-          .catch(err => {
-            if (err)
-              setError(true)
-          })
-    }, [coords])
+    // useEffect(() => {
+    //     axios.get(`https://www.mapquestapi.com/geocoding/v1/reverse?key=4vnji15LY55BpLWMGKkSMcsBGz5hkuAM&location=${coords[0]},${coords[1]}&includeRoadMetadata=true&includeNearestIntersection=true`)
+    //         .then(res => {
+    //             // setLocation({
+    //             //     country: res.data.results[0].locations[0].adminArea1,
+    //             //     state: res.data.results[0].locations[0].adminArea3,
+    //             //     city: res.data.results[0].locations[0].adminArea5,
+    //             // })
+    //         })
+    //     axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${coords[0]}&lon=${coords[1]}&appid=cb77ba3879d59e814a56609394606986`)
+    //         .then(res => {
+    //             setForeCastData(res.data)
+    //             setLoading(false)
+    //         })
+    //         .catch(err => {
+    //             if (err)
+    //                 setError(true)
+    //         })
+    // }, [coords])
 
     const handleOnChange = event => {
-        setCity(event.target.value)
-        setError(false)
+        // setCity(event.target.value)
+        // setError(false)
     }
 
     const handleSearch = () => {
-        getCoords(city)
-        setCity('')
+        // getCoords(city)
+        // setCity('')
     }
 
     const handleOnClick = event => {
@@ -80,12 +88,12 @@ const WeatherDashboard = () => {
     const getCoords = (search) => {
         axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${search}&appid=cb77ba3879d59e814a56609394606986`)
             .then(res => {
-                setCoords({ lat: res.data.coord.lat, lon: res.data.coord.lon })
+                // setCoords({ lat: res.data.coord.lat, lon: res.data.coord.lon })
                 storeCitySearch(res.data.name)
             })
             .catch(err => {
-                if (err)
-                    setError(true)
+                // if (err)
+                //     setError(true)
             })
     }
 
@@ -98,7 +106,7 @@ const WeatherDashboard = () => {
             if (searchHistory.length > 6) {
                 searchHistory.pop()
             }
-            setSearchHistory(searchHistory)
+            // setSearchHistory(searchHistory)
             localStorage.setItem('searchHistory', JSON.stringify(searchHistory))
         }
     }
@@ -128,38 +136,38 @@ const WeatherDashboard = () => {
                     onChange={handleUnitChange}
                 />
             </Form>
-            <Row>
+            {/* <Row>
                 <Col sm={4}>
                     <CityInput
-                        city={city}
-                        handleOnChange={handleOnChange}
-                        handleSearch={handleSearch}
+                        // city={city}
+                        // handleOnChange={handleOnChange}
+                        // handleSearch={handleSearch}
                     />
                     <ErrorAlert
                         // location={location}
-                        error={error}
+                        // error={error}
                     />
                     <SearchHistory
-                        history={searchHistory}
-                        handleOnClick={handleOnClick}
+                        // history={searchHistory}
+                        // handleOnClick={handleOnClick}
                     />
                 </Col>
-                <Col sm={8} className='px-1'>
+                <Col sm={8} className='px-1'> */}
                     <WeatherCard
                         coords={coords}
-                        // location={location}
+                        location={location}
                         currentWeather={forecastData?.current}
                         convertTemp={convertTemp}
                         tempUnit={tempUnit}
-                    // loading={loading}
+                        loading={loading}
                     />
-                </Col>
+                {/* </Col>
             </Row>
             <ForecastCard
-                coords={coords}
-                convertTemp={convertTemp}
-                tempUnit={tempUnit}
-            />
+                // coords={coords}
+                // convertTemp={convertTemp}
+                // tempUnit={tempUnit}
+            /> */}
         </Container>
     );
 };
