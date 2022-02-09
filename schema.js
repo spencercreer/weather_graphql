@@ -1,5 +1,6 @@
 const axios = require('axios');
-const { GraphQLObjectType, GraphQLInt, GraphQLFloat, GraphQLString, GraphQLList, GraphQLSchema } = require('graphql')
+const { GraphQLObjectType, GraphQLInt, GraphQLFloat, GraphQLString, GraphQLList, GraphQLSchema } = require('graphql');
+const { default: CityInput } = require('./client/src/components/CityInput/CityInput');
 
 const Location = new GraphQLObjectType({
     name: 'Location',
@@ -94,6 +95,16 @@ const RootQuery = new GraphQLObjectType({
             },
             resolve(parent, args) {
                 return axios.get(`https://www.mapquestapi.com/geocoding/v1/reverse?key=4vnji15LY55BpLWMGKkSMcsBGz5hkuAM&location=${args.lat},${args.lon}&includeRoadMetadata=true&includeNearestIntersection=true`)
+                    .then(res => res.data)
+            }
+        },
+        city: {
+            type: CityInput,
+            args: {
+                city: { type: GraphQLString }
+            },
+            resolve(parent, args) {
+                return axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${args.city}&appid=cb77ba3879d59e814a56609394606986`)
                     .then(res => res.data)
             }
         }

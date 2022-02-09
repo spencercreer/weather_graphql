@@ -26,13 +26,16 @@ const WEATHER_QUERY = gql`
   }
 `
 
-export default function WeatherCard({ location, convertTemp, tempUnit, coords }) {
+export default function WeatherCard({ location, convertTemp, tempUnit, coords, handleError }) {
 
   const { loading, error, data } = useQuery(WEATHER_QUERY, {
     variables: { lat: coords.lat, lon: coords.lon }
   })
 
-  if (error) console.log(error)
+  if (error) {
+    handleError()
+    return <Card style={{ opacity: '0.5', height: '305px' }} className='mb-2' />
+}
 
   if (data) {
     console.log(data)
@@ -57,8 +60,7 @@ export default function WeatherCard({ location, convertTemp, tempUnit, coords })
     return (
       <div style={{ position: 'relative' }}>
         <Spinner animation="border" variant="primary" className="m-3" style={{ position: 'absolute', top: '20px' }} />
-        <Card style={{ opacity: '0.5', height: '305px' }} className='mb-2'>
-        </Card>
+        <Card style={{ opacity: '0.5', height: '305px' }} className='mb-2' />
       </div>
     )
   }
@@ -84,5 +86,6 @@ WeatherCard.propTypes = {
   location: PropTypes.object,
   convertTemp: PropTypes.func,
   tempUnit: PropTypes.string,
-  coords: PropTypes.object
+  coords: PropTypes.object,
+  handleError: PropTypes.func,
 }

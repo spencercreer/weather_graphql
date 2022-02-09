@@ -5,7 +5,6 @@ import SearchHistory from '../SearchHistory/SearchHistory'
 import WeatherCard from '../WeatherCard/WeatherCard'
 import ForecastCard from '../ForecastCard/ForecastCard'
 import { Container, Row, Col, Form } from 'react-bootstrap'
-import axios from 'axios'
 
 import {
     useQuery
@@ -14,7 +13,7 @@ import gql from 'graphql-tag'
 
 const LOCATION_QUERY = gql`
   query LocationQuery($lat: Float!, $lon: Float!) {
-    location(lat: $lat, lon: $lon){
+    location(lat: $lat, lon: $lon) {
       results {
         locations {
           adminArea1
@@ -25,16 +24,24 @@ const LOCATION_QUERY = gql`
     }
   }
 `
-const WeatherDashboard = () => {
-    const [coords, setCoords] = useState({ lat: 33.4, lon: -112.1 })
+const CITY_QUERY = gql`
+    query CityQuery($city: String!) {
+        city(city: $city) {
+            coord {
+                lat
+                lon
+            }
+        }
+    }
+`
 
-    // const [city, setCity] = useState('')
-    // const [location, setLocation] = useState({ country: 'US', state: 'AZ', city: 'Phoenix' })
-    // const [error, setError] = useState(false)
-    const [forecastData, setForeCastData] = useState({})
+const WeatherDashboard = () => {
+
+    const [coords, setCoords] = useState({ lat: 33.4, lon: -112.1 })
+    const [city, setCity] = useState('')
+    const [searchError, setSearchError] = useState(false)
     const [searchHistory, setSearchHistory] = useState([])
     const [tempUnit, setTempUnit] = useState('F')
-    // const [loading, setLoading] = useState(true)
 
     const { loading, error, data } = useQuery(LOCATION_QUERY, {
         variables: { lat: coords.lat, lon: coords.lon }
@@ -50,30 +57,33 @@ const WeatherDashboard = () => {
     }
 
     const handleOnChange = event => {
-        // setCity(event.target.value)
-        // setError(false)
+        setCity(event.target.value)
+        setSearchError(false)
     }
 
     const handleSearch = () => {
-        // getCoords(city)
-        // setCity('')
+        getCoords(city)
+        setCity('')
     }
-
     const handleOnClick = event => {
-        // setLoading(true)
         getCoords(event.target.value)
     }
 
+    const handleError = () => setSearchError(true)
+
+    // const { data } = useQuery(CITY_QUERY, {
+    //     variables: { city: 'Tempe' }
+    // })
+
+    // if (data) {
+    //     console.log(data)
+    // }
+    
     const getCoords = (search) => {
-        axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${search}&appid=cb77ba3879d59e814a56609394606986`)
-            .then(res => {
-                // setCoords({ lat: res.data.coord.lat, lon: res.data.coord.lon })
-                storeCitySearch(res.data.name)
-            })
-            .catch(err => {
-                // if (err)
-                //     setError(true)
-            })
+        //     .catch(err => {
+        //         // if (err)
+        //         //     setSearchError(true)
+        //     })
     }
 
     const storeCitySearch = (city) => {
@@ -115,36 +125,38 @@ const WeatherDashboard = () => {
                     onChange={handleUnitChange}
                 />
             </Form>
-            {/* <Row>
+            <Row>
                 <Col sm={4}>
                     <CityInput
                         // city={city}
-                        // handleOnChange={handleOnChange}
-                        // handleSearch={handleSearch}
+                        handleOnChange={handleOnChange}
+                        handleSearch={handleSearch}
                     />
                     <ErrorAlert
-                        // location={location}
-                        // error={error}
+                        // city={city}
+                        error={searchError}
                     />
                     <SearchHistory
-                        // history={searchHistory}
-                        // handleOnClick={handleOnClick}
+                        history={searchHistory}
+                        handleOnClick={handleOnClick}
                     />
                 </Col>
-                <Col sm={8} className='px-1'> */}
+                <Col sm={8} className='px-1'>
                     <WeatherCard
                         coords={coords}
                         location={location}
-                        currentWeather={forecastData?.current}
                         convertTemp={convertTemp}
                         tempUnit={tempUnit}
+                        handleError={handleError}
                     />
-                {/* </Col>
-            </Row> */}
+                </Col>
+            </Row>
             <ForecastCard
                 coords={coords}
                 convertTemp={convertTemp}
                 tempUnit={tempUnit}
+                handleError={handleError}
+
             />
         </Container>
     );

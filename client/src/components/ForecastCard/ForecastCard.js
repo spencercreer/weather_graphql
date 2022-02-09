@@ -27,12 +27,16 @@ const FORECAST_QUERY = gql`
 }
 `
 
-export default function ForecastCard({ convertTemp, tempUnit, coords }) {
+export default function ForecastCard({ convertTemp, tempUnit, coords, handleError }) {
 
     const { loading, error, data } = useQuery(FORECAST_QUERY, {
-        variables: { lat: coords.lat, lon: coords.lon }
+        variables: { lat: 10000, lon: 200000 }
     })
-    if (error) console.log(error)
+
+    if (error) {
+        handleError()
+        return null
+    }
 
     if (data) {
         console.log(data)
@@ -41,13 +45,12 @@ export default function ForecastCard({ convertTemp, tempUnit, coords }) {
         var fiveDayForecast = daily.slice(0, 5)
     }
 
-
     if (loading) {
         return (
             <Spinner animation="border" variant="primary" className="m-3" style={{ opacity: '0.5' }} />
         )
     }
-    
+
     return (
         <Row>
             {fiveDayForecast.map((forecast, i) => (
@@ -69,4 +72,5 @@ ForecastCard.propTypes = {
     coords: PropTypes.object,
     convertTemp: PropTypes.func,
     tempUnit: PropTypes.string,
+    handleError: PropTypes.func,
 }
