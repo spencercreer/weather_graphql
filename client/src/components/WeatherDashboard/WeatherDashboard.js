@@ -49,27 +49,6 @@ const WeatherDashboard = () => {
         location = { country, state, city }
     }
 
-
-    // useEffect(() => {
-    //     axios.get(`https://www.mapquestapi.com/geocoding/v1/reverse?key=4vnji15LY55BpLWMGKkSMcsBGz5hkuAM&location=${coords[0]},${coords[1]}&includeRoadMetadata=true&includeNearestIntersection=true`)
-    //         .then(res => {
-    //             // setLocation({
-    //             //     country: res.data.results[0].locations[0].adminArea1,
-    //             //     state: res.data.results[0].locations[0].adminArea3,
-    //             //     city: res.data.results[0].locations[0].adminArea5,
-    //             // })
-    //         })
-    //     axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${coords[0]}&lon=${coords[1]}&appid=cb77ba3879d59e814a56609394606986`)
-    //         .then(res => {
-    //             setForeCastData(res.data)
-    //             setLoading(false)
-    //         })
-    //         .catch(err => {
-    //             if (err)
-    //                 setError(true)
-    //         })
-    // }, [coords])
-
     const handleOnChange = event => {
         // setCity(event.target.value)
         // setError(false)
@@ -129,7 +108,7 @@ const WeatherDashboard = () => {
     }
 
     return (
-        <Container className='px-5' fluid><div>Hello</div>
+        <Container className='px-5' fluid>
             <Form>
                 <Form.Switch
                     label={`${String.fromCharCode(176)}${tempUnit}`}
@@ -159,15 +138,14 @@ const WeatherDashboard = () => {
                         currentWeather={forecastData?.current}
                         convertTemp={convertTemp}
                         tempUnit={tempUnit}
-                        loading={loading}
                     />
                 {/* </Col>
-            </Row>
+            </Row> */}
             <ForecastCard
-                // coords={coords}
-                // convertTemp={convertTemp}
-                // tempUnit={tempUnit}
-            /> */}
+                coords={coords}
+                convertTemp={convertTemp}
+                tempUnit={tempUnit}
+            />
         </Container>
     );
 };

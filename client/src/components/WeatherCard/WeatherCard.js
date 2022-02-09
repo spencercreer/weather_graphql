@@ -3,15 +3,8 @@ import { Card, Image, Alert, Spinner } from 'react-bootstrap'
 import moment from 'moment'
 import PropTypes from 'prop-types'
 
-import {
-  ApolloClient,
-  InMemoryCache,
-  ApolloProvider,
-  createHttpLink,
-  useQuery
-} from '@apollo/client';
-import { setContext } from '@apollo/client/link/context';
 import gql from 'graphql-tag'
+import { useQuery } from '@apollo/client';
 
 const { Title, Body, Text } = Card
 
@@ -34,7 +27,7 @@ const WEATHER_QUERY = gql`
 `
 
 export default function WeatherCard({ location, convertTemp, tempUnit, coords }) {
-  
+
   const { loading, error, data } = useQuery(WEATHER_QUERY, {
     variables: { lat: coords.lat, lon: coords.lon }
   })
