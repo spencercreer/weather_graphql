@@ -30,19 +30,21 @@ const FORECAST_QUERY = gql`
 export default function ForecastCard({ convertTemp, tempUnit, coords, handleError }) {
 
     const { loading, error, data } = useQuery(FORECAST_QUERY, {
-        variables: { lat: 10000, lon: 200000 }
+        variables: { lat: coords.lat, lon: coords.lon }
     })
 
-    if (error) {
-        handleError()
-        return null
-    }
+    // if (error) {
+    //     handleError()
+    //     return null
+    // }
+
+    let fiveDayForecast = []
 
     if (data) {
         console.log(data)
         var { daily, timezone_offset } = data.weather
 
-        var fiveDayForecast = daily.slice(0, 5)
+        fiveDayForecast = daily.slice(0, 5)
     }
 
     if (loading) {

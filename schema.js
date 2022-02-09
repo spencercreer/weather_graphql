@@ -1,6 +1,20 @@
 const axios = require('axios');
 const { GraphQLObjectType, GraphQLInt, GraphQLFloat, GraphQLString, GraphQLList, GraphQLSchema } = require('graphql');
-const { default: CityInput } = require('./client/src/components/CityInput/CityInput');
+
+const City = new GraphQLObjectType({
+    name: 'City',
+    fields: () => ({
+        coord: { type: Coords}
+    })
+})
+
+const Coords = new GraphQLObjectType({
+    name: 'Coords',
+    fields: () => ({
+        lat: { type: GraphQLFloat },
+        lon: { type: GraphQLFloat }
+    })
+})
 
 const Location = new GraphQLObjectType({
     name: 'Location',
@@ -99,7 +113,7 @@ const RootQuery = new GraphQLObjectType({
             }
         },
         city: {
-            type: CityInput,
+            type: City,
             args: {
                 city: { type: GraphQLString }
             },

@@ -5,25 +5,13 @@ import SearchHistory from '../SearchHistory/SearchHistory'
 import WeatherCard from '../WeatherCard/WeatherCard'
 import ForecastCard from '../ForecastCard/ForecastCard'
 import { Container, Row, Col, Form } from 'react-bootstrap'
+import axios from 'axios'
 
 import {
     useQuery
 } from '@apollo/client';
 import gql from 'graphql-tag'
 
-const LOCATION_QUERY = gql`
-  query LocationQuery($lat: Float!, $lon: Float!) {
-    location(lat: $lat, lon: $lon) {
-      results {
-        locations {
-          adminArea1
-          adminArea3
-          adminArea5
-        }
-      }
-    }
-  }
-`
 const CITY_QUERY = gql`
     query CityQuery($city: String!) {
         city(city: $city) {
@@ -43,18 +31,25 @@ const WeatherDashboard = () => {
     const [searchHistory, setSearchHistory] = useState([])
     const [tempUnit, setTempUnit] = useState('F')
 
-    const { loading, error, data } = useQuery(LOCATION_QUERY, {
-        variables: { lat: coords.lat, lon: coords.lon }
-    })
+    useEffect(() => {
+        // const mounted if mounted
+        // if geolocation
+        setCoords({ lat: 40.8, lon: -111.9})
+        // return mounted
+    }, [])
 
-    let location = {}
+    // const { loading, error, data } = useQuery(LOCATION_QUERY, {
+    //     variables: { lat: coords.lat, lon: coords.lon }
+    // })
 
-    if (data) {
-        const country = data.location.results[0].locations[0].adminArea1
-        const state = data.location.results[0].locations[0].adminArea3
-        const city = data.location.results[0].locations[0].adminArea5
-        location = { country, state, city }
-    }
+    // let location = {}
+
+    // if (data) {
+    //     const country = data.location.results[0].locations[0].adminArea1
+    //     const state = data.location.results[0].locations[0].adminArea3
+    //     const city = data.location.results[0].locations[0].adminArea5
+    //     location = { country, state, city }
+    // }
 
     const handleOnChange = event => {
         setCity(event.target.value)
@@ -71,15 +66,19 @@ const WeatherDashboard = () => {
 
     const handleError = () => setSearchError(true)
 
-    // const { data } = useQuery(CITY_QUERY, {
-    //     variables: { city: 'Tempe' }
-    // })
+    const { data } = useQuery(CITY_QUERY, {
+        variables: { city: 'Tempe' }
+    })
 
-    // if (data) {
-    //     console.log(data)
-    // }
-    
+    if (data) {
+        console.log(data)
+    }
     const getCoords = (search) => {
+        // axios.get(`https://api.openweathermap.org/data/2.5/weather?q=Tempe&appid=cb77ba3879d59e814a56609394606986`)
+        //     .then(res => {
+        //         // setCoords({ lat: res.data.coord.lat, lon: res.data.coord.lon })
+        //         storeCitySearch(res.data.name)
+        //     })
         //     .catch(err => {
         //         // if (err)
         //         //     setSearchError(true)
@@ -128,12 +127,12 @@ const WeatherDashboard = () => {
             <Row>
                 <Col sm={4}>
                     <CityInput
-                        // city={city}
+                        city={city}
                         handleOnChange={handleOnChange}
                         handleSearch={handleSearch}
                     />
                     <ErrorAlert
-                        // city={city}
+                        // location={location}
                         error={searchError}
                     />
                     <SearchHistory
@@ -144,7 +143,7 @@ const WeatherDashboard = () => {
                 <Col sm={8} className='px-1'>
                     <WeatherCard
                         coords={coords}
-                        location={location}
+                        // location={location}
                         convertTemp={convertTemp}
                         tempUnit={tempUnit}
                         handleError={handleError}

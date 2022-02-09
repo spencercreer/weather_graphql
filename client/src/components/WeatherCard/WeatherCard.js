@@ -25,6 +25,19 @@ const WEATHER_QUERY = gql`
     }
   }
 `
+const LOCATION_QUERY = gql`
+  query LocationQuery($lat: Float!, $lon: Float!) {
+    location(lat: $lat, lon: $lon) {
+      results {
+        locations {
+          adminArea1
+          adminArea3
+          adminArea5
+        }
+      }
+    }
+  }
+`
 
 export default function WeatherCard({ location, convertTemp, tempUnit, coords, handleError }) {
 
@@ -32,10 +45,16 @@ export default function WeatherCard({ location, convertTemp, tempUnit, coords, h
     variables: { lat: coords.lat, lon: coords.lon }
   })
 
-  if (error) {
-    handleError()
-    return <Card style={{ opacity: '0.5', height: '305px' }} className='mb-2' />
-}
+  const { loading: locationLoading, data: locationData, error: locationError, } = useQuery(LOCATION_QUERY, {
+    variables: { lat: coords.lat, lon: coords.lon }
+  })
+
+  if (locationData) console.log(locationData)
+
+  // if (error) {
+  //   handleError()
+  //   return null
+  // }
 
   if (data) {
     console.log(data)
@@ -60,7 +79,8 @@ export default function WeatherCard({ location, convertTemp, tempUnit, coords, h
     return (
       <div style={{ position: 'relative' }}>
         <Spinner animation="border" variant="primary" className="m-3" style={{ position: 'absolute', top: '20px' }} />
-        <Card style={{ opacity: '0.5', height: '305px' }} className='mb-2' />
+        <Card style={{ opacity: '0.5', height: '305px' }} className='mb-2'>
+        </Card>
       </div>
     )
   }
