@@ -39,26 +39,30 @@ const LOCATION_QUERY = gql`
   }
 `
 
-export default function WeatherCard({ location, convertTemp, tempUnit, coords, handleError }) {
+export default function WeatherCard({ convertTemp, tempUnit, coords, handleError }) {
 
-  const { loading, error, data } = useQuery(WEATHER_QUERY, {
+  const { loading: weatherLoading, data: weatherData, error: weatherError } = useQuery(WEATHER_QUERY, {
     variables: { lat: coords.lat, lon: coords.lon }
   })
 
   const { loading: locationLoading, data: locationData, error: locationError, } = useQuery(LOCATION_QUERY, {
     variables: { lat: coords.lat, lon: coords.lon }
   })
+  
+  if (weatherError || locationError) {
+    handleError()
+    return null
+  }
 
-  if (locationData) console.log(locationData)
+  if (locationData) {
+    var country = locationData.location.results[0].locations[0].adminArea1
+    var state = locationData.location.results[0].locations[0].adminArea3
+    var city = locationData.location.results[0].locations[0].adminArea5
+  }
 
-  // if (error) {
-  //   handleError()
-  //   return null
-  // }
-
-  if (data) {
-    console.log(data)
-    var { current: { humidity, temp, uvi, weather, wind_deg, wind_speed }, timezone_offset } = data.weather
+  if (weatherData) {
+    console.log(weatherData)
+    var { current: { humidity, temp, uvi, weather, wind_deg, wind_speed }, timezone_offset } = weatherData.weather
     var iconLink = weather[0].icon ? `http://openweathermap.org/img/wn/${weather[0].icon}@2x.png` : 'http://openweathermap.org/img/wn/03n@2x.png'
     var windDir = wind_deg - 43 || -43
     var windDirStyle = {
@@ -75,7 +79,7 @@ export default function WeatherCard({ location, convertTemp, tempUnit, coords, h
       uviAlert = 'danger'
   }
 
-  if (loading) {
+  if (weatherLoading || locationLoading) {
     return (
       <div style={{ position: 'relative' }}>
         <Spinner animation="border" variant="primary" className="m-3" style={{ position: 'absolute', top: '20px' }} />
@@ -89,7 +93,7 @@ export default function WeatherCard({ location, convertTemp, tempUnit, coords, h
     <Card style={{ height: '305px' }} className='mb-2'>
       <Body>
         <Text>{moment().utcOffset(timezone_offset / 60).format('LLLL')}</Text>
-        <Title>{location?.city}, {location?.country}
+        <Title>{city}, {country}
           <Image src={iconLink} style={{ display: 'inline-block', height: '60px', width: '60px' }} rounded />
         </Title>
         <Text>{convertTemp(temp) + String.fromCharCode(176)} {tempUnit}</Text>
@@ -103,7 +107,6 @@ export default function WeatherCard({ location, convertTemp, tempUnit, coords, h
 }
 
 WeatherCard.propTypes = {
-  location: PropTypes.object,
   convertTemp: PropTypes.func,
   tempUnit: PropTypes.string,
   coords: PropTypes.object,

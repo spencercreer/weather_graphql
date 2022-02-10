@@ -31,25 +31,38 @@ const WeatherDashboard = () => {
     const [searchHistory, setSearchHistory] = useState([])
     const [tempUnit, setTempUnit] = useState('F')
 
+    const { data } = useQuery(CITY_QUERY, {
+        variables: { city: city }
+    })
+
+    if (data) {
+        console.log(data)
+    }
+
     useEffect(() => {
+        let mounted = true
+
+        if (mounted) {
+            //get users geolocation or set coords to Phoenix
+            if (navigator.geolocation)
+                navigator.geolocation.getCurrentPosition((position) => {
+                    setCoords({ lat: position.coords.latitude, lon: position.coords.longitude })
+                })
+            else
+                setCoords({ lat: 33.4, lon: -112.1 })
+
+            //local storage search history
+            const citySearches = JSON.parse(localStorage.getItem('searchHistory')) || []
+            setSearchHistory(citySearches)
+        }
+
+        return () => mounted = false
         // const mounted if mounted
         // if geolocation
-        setCoords({ lat: 40.8, lon: -111.9})
+        setCoords({ lat: 40.8, lon: -111.9 })
         // return mounted
     }, [])
 
-    // const { loading, error, data } = useQuery(LOCATION_QUERY, {
-    //     variables: { lat: coords.lat, lon: coords.lon }
-    // })
-
-    // let location = {}
-
-    // if (data) {
-    //     const country = data.location.results[0].locations[0].adminArea1
-    //     const state = data.location.results[0].locations[0].adminArea3
-    //     const city = data.location.results[0].locations[0].adminArea5
-    //     location = { country, state, city }
-    // }
 
     const handleOnChange = event => {
         setCity(event.target.value)
@@ -66,13 +79,6 @@ const WeatherDashboard = () => {
 
     const handleError = () => setSearchError(true)
 
-    const { data } = useQuery(CITY_QUERY, {
-        variables: { city: 'Tempe' }
-    })
-
-    if (data) {
-        console.log(data)
-    }
     const getCoords = (search) => {
         // axios.get(`https://api.openweathermap.org/data/2.5/weather?q=Tempe&appid=cb77ba3879d59e814a56609394606986`)
         //     .then(res => {
