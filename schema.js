@@ -1,8 +1,8 @@
 const axios = require('axios');
 const { GraphQLObjectType, GraphQLInt, GraphQLFloat, GraphQLString, GraphQLList, GraphQLSchema } = require('graphql');
 
-const City = new GraphQLObjectType({
-    name: 'City',
+const CityCoords = new GraphQLObjectType({
+    name: 'CityCoords',
     fields: () => ({
         coord: { type: Coords}
     })
@@ -112,8 +112,8 @@ const RootQuery = new GraphQLObjectType({
                     .then(res => res.data)
             }
         },
-        city: {
-            type: City,
+        cityCoords: {
+            type: CityCoords,
             args: {
                 city: { type: GraphQLString }
             },

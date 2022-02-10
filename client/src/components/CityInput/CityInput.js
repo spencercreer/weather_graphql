@@ -1,11 +1,24 @@
+import { useState } from 'react'
 import { InputGroup, FormControl, Button } from 'react-bootstrap'
 import PropTypes from 'prop-types'
 
-export default function CityInput({ city, handleOnChange, handleSearch }) {
+export default function CityInput({ handleSearch }) {
+    const [city, setCity] = useState('')
+
+    const handleOnChange = event => {
+        setCity(event.target.value)
+    }
+    
     const handleKeyUp = event => {
         if (event.keyCode === 13) {
-            handleSearch()
+            handleSearch(city)
+            setCity('')
         }
+    }
+
+    const handleSubmit = () => {
+        handleSearch(city)
+        setCity('')
     }
 
     return (
@@ -17,12 +30,13 @@ export default function CityInput({ city, handleOnChange, handleSearch }) {
                 value={city}
                 onChange={handleOnChange}
                 onKeyUp={handleKeyUp}
+                onBlur={handleSubmit}
             />
             <Button
                 id='search-btn'
                 className='fas fa-search'
                 variant='outline-primary'
-                onClick={handleSearch}
+                onClick={handleSubmit}
             />
         </InputGroup>
     )

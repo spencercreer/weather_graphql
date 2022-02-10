@@ -12,9 +12,9 @@ import {
 } from '@apollo/client';
 import gql from 'graphql-tag'
 
-const CITY_QUERY = gql`
-    query CityQuery($city: String!) {
-        city(city: $city) {
+const COORDS_QUERY = gql`
+    query CityCoordsQuery($city: String!) {
+        cityCoords(city: $city) {
             coord {
                 lat
                 lon
@@ -25,31 +25,23 @@ const CITY_QUERY = gql`
 
 const WeatherDashboard = () => {
 
-    const [coords, setCoords] = useState({ lat: 33.4, lon: -112.1 })
-    const [city, setCity] = useState('')
+    // const [coords, setCoords] = useState({ lat: 33.4, lon: -112.1 })
+    const [city, setCity] = useState('Phoenix')
     const [searchError, setSearchError] = useState(false)
     const [searchHistory, setSearchHistory] = useState([])
     const [tempUnit, setTempUnit] = useState('F')
-
-    const { data } = useQuery(CITY_QUERY, {
-        variables: { city: city }
-    })
-
-    if (data) {
-        console.log(data)
-    }
 
     useEffect(() => {
         let mounted = true
 
         if (mounted) {
-            //get users geolocation or set coords to Phoenix
-            if (navigator.geolocation)
-                navigator.geolocation.getCurrentPosition((position) => {
-                    setCoords({ lat: position.coords.latitude, lon: position.coords.longitude })
-                })
-            else
-                setCoords({ lat: 33.4, lon: -112.1 })
+            //     //get users geolocation or set coords to Phoenix
+            //     if (navigator.geolocation)
+            //         navigator.geolocation.getCurrentPosition((position) => {
+            //             setCoords({ lat: position.coords.latitude, lon: position.coords.longitude })
+            //         })
+            //     else
+            //         setCoords({ lat: 33.4, lon: -112.1 })
 
             //local storage search history
             const citySearches = JSON.parse(localStorage.getItem('searchHistory')) || []
@@ -57,39 +49,22 @@ const WeatherDashboard = () => {
         }
 
         return () => mounted = false
-        // const mounted if mounted
-        // if geolocation
-        setCoords({ lat: 40.8, lon: -111.9 })
-        // return mounted
     }, [])
 
+    const { data, loading } = useQuery(COORDS_QUERY, {
+        variables: { city: city }
+    })
 
-    const handleOnChange = event => {
-        setCity(event.target.value)
-        setSearchError(false)
-    }
+    if (loading) return <h1>Loading...</h1>
 
-    const handleSearch = () => {
-        getCoords(city)
-        setCity('')
-    }
-    const handleOnClick = event => {
-        getCoords(event.target.value)
+    const coords = { lat: data.cityCoords.coord.lat, lon: data.cityCoords.coord.lon }
+
+    const handleSearch = (city) => {
+        setCity(city)
+        storeCitySearch(city)
     }
 
     const handleError = () => setSearchError(true)
-
-    const getCoords = (search) => {
-        // axios.get(`https://api.openweathermap.org/data/2.5/weather?q=Tempe&appid=cb77ba3879d59e814a56609394606986`)
-        //     .then(res => {
-        //         // setCoords({ lat: res.data.coord.lat, lon: res.data.coord.lon })
-        //         storeCitySearch(res.data.name)
-        //     })
-        //     .catch(err => {
-        //         // if (err)
-        //         //     setSearchError(true)
-        //     })
-    }
 
     const storeCitySearch = (city) => {
         //check search history to ensure it is not a duplicate
@@ -133,8 +108,6 @@ const WeatherDashboard = () => {
             <Row>
                 <Col sm={4}>
                     <CityInput
-                        city={city}
-                        handleOnChange={handleOnChange}
                         handleSearch={handleSearch}
                     />
                     <ErrorAlert
@@ -143,7 +116,7 @@ const WeatherDashboard = () => {
                     />
                     <SearchHistory
                         history={searchHistory}
-                        handleOnClick={handleOnClick}
+                        handleSearch={handleSearch}
                     />
                 </Col>
                 <Col sm={8} className='px-1'>
