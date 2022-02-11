@@ -1,11 +1,10 @@
-import { Fragment, useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import CityInput from '../CityInput/CityInput'
 import ErrorAlert from '../ErrorAlert/ErrorAlert'
 import SearchHistory from '../SearchHistory/SearchHistory'
 import WeatherCard from '../WeatherCard/WeatherCard'
 import ForecastCard from '../ForecastCard/ForecastCard'
-import { Container, Row, Col, Form } from 'react-bootstrap'
-import axios from 'axios'
+import { Container, Row, Col, Form, Spinner } from 'react-bootstrap'
 
 import {
     useQuery
@@ -25,7 +24,7 @@ const COORDS_QUERY = gql`
 
 const WeatherDashboard = () => {
 
-    // const [coords, setCoords] = useState({ lat: 33.4, lon: -112.1 })
+    const [coords, setCoords] = useState({ lat: 51.5, lon: 0.1276 })
     const [city, setCity] = useState('Phoenix')
     const [searchError, setSearchError] = useState(false)
     const [searchHistory, setSearchHistory] = useState([])
@@ -35,13 +34,13 @@ const WeatherDashboard = () => {
         let mounted = true
 
         if (mounted) {
-            //     //get users geolocation or set coords to Phoenix
-            //     if (navigator.geolocation)
-            //         navigator.geolocation.getCurrentPosition((position) => {
-            //             setCoords({ lat: position.coords.latitude, lon: position.coords.longitude })
-            //         })
-            //     else
-            //         setCoords({ lat: 33.4, lon: -112.1 })
+            //get users geolocation or set coords to Phoenix
+            if (navigator.geolocation)
+                navigator.geolocation.getCurrentPosition((position) => {
+                    setCoords({ lat: position.coords.latitude, lon: position.coords.longitude })
+                })
+            else
+                setCoords({ lat: 51.5, lon: 0.1276 })
 
             //local storage search history
             const citySearches = JSON.parse(localStorage.getItem('searchHistory')) || []
@@ -51,13 +50,7 @@ const WeatherDashboard = () => {
         return () => mounted = false
     }, [])
 
-    const { data, loading } = useQuery(COORDS_QUERY, {
-        variables: { city: city }
-    })
 
-    if (loading) return <h1>Loading...</h1>
-
-    const coords = { lat: data.cityCoords.coord.lat, lon: data.cityCoords.coord.lon }
 
     const handleSearch = (city) => {
         setCity(city)
@@ -97,47 +90,97 @@ const WeatherDashboard = () => {
         return convertedTemp.toFixed()
     }
 
-    return (
-        <Container className='px-5' fluid>
-            <Form>
-                <Form.Switch
-                    label={`${String.fromCharCode(176)}${tempUnit}`}
-                    onChange={handleUnitChange}
-                />
-            </Form>
-            <Row>
-                <Col sm={4}>
-                    <CityInput
-                        handleSearch={handleSearch}
-                    />
-                    <ErrorAlert
-                        // location={location}
-                        error={searchError}
-                    />
-                    <SearchHistory
-                        history={searchHistory}
-                        handleSearch={handleSearch}
-                    />
-                </Col>
-                <Col sm={8} className='px-1'>
-                    <WeatherCard
-                        coords={coords}
-                        // location={location}
-                        convertTemp={convertTemp}
-                        tempUnit={tempUnit}
-                        handleError={handleError}
-                    />
-                </Col>
-            </Row>
-            <ForecastCard
-                coords={coords}
-                convertTemp={convertTemp}
-                tempUnit={tempUnit}
-                handleError={handleError}
+    const { data, loading } = useQuery(COORDS_QUERY, {
+        variables: { city: city }
+    })
 
-            />
-        </Container>
-    );
+    if (loading) return <Spinner animation="border" variant="primary" className="m-3" style={{ opacity: '0.5' }} />
+
+    if (data) {
+        const coordinates = { lat: data.cityCoords.coord.lat, lon: data.cityCoords.coord.lon }
+        return (
+            <Container className='px-5' fluid>
+                <Form>
+                    <Form.Switch
+                        label={`${String.fromCharCode(176)}${tempUnit}`}
+                        onChange={handleUnitChange}
+                    />
+                </Form>
+                <Row>
+                    <Col sm={4}>
+                        <CityInput
+                            handleSearch={handleSearch}
+                        />
+                        <ErrorAlert
+                            // location={location}
+                            error={searchError}
+                        />
+                        <SearchHistory
+                            history={searchHistory}
+                            handleSearch={handleSearch}
+                        />
+                    </Col>
+                    <Col sm={8} className='px-1'>
+                        <WeatherCard
+                            coords={coordinates}
+                            convertTemp={convertTemp}
+                            tempUnit={tempUnit}
+                            handleError={handleError}
+                        />
+                    </Col>
+                </Row>
+                <ForecastCard
+                    coords={coordinates}
+                    convertTemp={convertTemp}
+                    tempUnit={tempUnit}
+                    handleError={handleError}
+
+                />
+            </Container>
+        )
+    }
+    else {
+        return (
+            <Container className='px-5' fluid>
+                <Form>
+                    <Form.Switch
+                        label={`${String.fromCharCode(176)}${tempUnit}`}
+                        onChange={handleUnitChange}
+                    />
+                </Form>
+                <Row>
+                    <Col sm={4}>
+                        <CityInput
+                            handleSearch={handleSearch}
+                        />
+                        <ErrorAlert
+                            // location={location}
+                            error={searchError}
+                        />
+                        <SearchHistory
+                            history={searchHistory}
+                            handleSearch={handleSearch}
+                        />
+                    </Col>
+                    <Col sm={8} className='px-1'>
+                        <WeatherCard
+                            coords={coords}
+                            convertTemp={convertTemp}
+                            tempUnit={tempUnit}
+                            handleError={handleError}
+                        />
+                    </Col>
+                </Row>
+                <ForecastCard
+                    coords={coords}
+                    convertTemp={convertTemp}
+                    tempUnit={tempUnit}
+                    handleError={handleError}
+
+                />
+            </Container>
+        );
+    }
 };
 
 export default WeatherDashboard;
