@@ -63,7 +63,7 @@ export default function WeatherCard({ convertTemp, tempUnit, coords, handleError
   if (weatherData) {
     console.log(weatherData)
     var { current: { humidity, temp, uvi, weather, wind_deg, wind_speed }, timezone_offset } = weatherData.weather
-    var iconLink = weather[0].icon ? `http://openweathermap.org/img/wn/${weather[0].icon}@2x.png` : 'http://openweathermap.org/img/wn/03n.png'
+    var iconLink = weather[0].icon ? `http://openweathermap.org/img/wn/${weather[0].icon}.png` : 'http://openweathermap.org/img/wn/03n.png'
     var windDir = wind_deg - 43 || -43
     var windDirStyle = {
       transform: `rotate(${windDir}deg)`,

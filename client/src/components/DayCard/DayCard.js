@@ -24,7 +24,7 @@ export default function DayCard({ index, forecast, locationTime, convertTemp, te
         fontSize: '10px',
     };
 
-    const iconLink = forecast?.weather[0]?.icon ? `http://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png` : 'http://openweathermap.org/img/wn/03n.png'
+    const iconLink = forecast?.weather[0]?.icon ? `http://openweathermap.org/img/wn/${forecast.weather[0].icon}.png` : 'http://openweathermap.org/img/wn/03n.png'
 
     let uviAlert = ''
     const uvi = forecast?.uvi || 0
