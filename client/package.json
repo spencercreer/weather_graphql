@@ -2,7 +2,7 @@
   "name": "weather_dashboard",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://spencercreer.github.io/weather_dashboard",
+  "homepage": "https://gentle-scrubland-59207.herokuapp.com/",
   "dependencies": {
     "@apollo/client": "^3.3.7",
     "@testing-library/jest-dom": "^5.16.1",
