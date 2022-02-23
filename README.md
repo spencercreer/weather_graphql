@@ -22,9 +22,9 @@ The application prepends the searched city to a list and stores it in local stor
 * [Contact](#contact)
 
 ## Links
-Published URL: [https://spencercreer.github.io/weather_dashboard/](https://spencercreer.github.io/weather_dashboard/)<br>
+Published URL: [https://explore-weather-graphql.herokuapp.com/](https://explore-weather-graphql.herokuapp.com/)<br>
 
-Repository: [https://github.com/spencercreer/weather_dashboard](https://github.com/spencercreer/weather_dashboard)
+Repository: [https://github.com/spencercreer/weather_graphql](https://github.com/spencercreer/weather_graphql)
 
 
 ## Animation
