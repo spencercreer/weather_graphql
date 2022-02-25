@@ -45,6 +45,17 @@ To install necessary dependencies, run the following command:
   ```
   npm install
   ```
+ 
+## Dependencies
+This application utilizes the following dependencies:
+
+|Dependency     |Version    |
+|---------------|-----------|
+|axios          |0.24.0     |
+|bootstrap      |5.1.3      |
+|moment         |2.29.1     |
+|react          |17.0.2     |
+|react-bootstrap|2.0.3      |
 
 ## Instructions
 The user may search the weather of a city by entering the city name in the input element. A list of searched cities is created and the user may recall previously searched weather forecasts by clicking a list element.
