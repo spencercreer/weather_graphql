@@ -22,9 +22,9 @@ The application prepends the searched city to a list and stores it in local stor
 * [Contact](#contact)
 
 ## Links
-Published URL: [https://spencercreer.github.io/weather_dashboard/](https://spencercreer.github.io/weather_dashboard/)<br>
+Published URL: [https://explore-weather-graphql.herokuapp.com/](https://explore-weather-graphql.herokuapp.com/)<br>
 
-Repository: [https://github.com/spencercreer/weather_dashboard](https://github.com/spencercreer/weather_dashboard)
+Repository: [https://github.com/spencercreer/weather_graphql](https://github.com/spencercreer/weather_graphql)
 
 
 ## Animation
@@ -32,19 +32,26 @@ The following image demonstrates the application appearance:<br>
 ![Weather Dashboard animation](./public/weather_dashboard.PNG)
 
 ## Installation
-This application utilizes the following dependencies:
+This application utilizes the following [dependencies](#dependencies).
 
- * axios
- * bootstrap
- * moment
- * react
- * react-bootstrap
-
-To install necessary dependencies, run the following command:
+After cloning the repo locally, install the necessary dependencies by running the following command:
 
   ```
   npm install
   ```
+<span style="color:green">Node v16.13.1 and npm v8.3.0</span>
+ 
+## Dependencies
+
+This application utilizes the following dependencies:
+
+|Dependency        |Version    |
+|------------------|-----------|
+|axios             |0.24.0     |
+|bootstrap         |5.1.3      |
+|moment            |2.29.1     |
+|react             |17.0.2     |
+|react-bootstrap   |2.0.3      |
 
 ## Instructions
 The user may search the weather of a city by entering the city name in the input element. A list of searched cities is created and the user may recall previously searched weather forecasts by clicking a list element.
