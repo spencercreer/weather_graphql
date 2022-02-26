@@ -40,7 +40,6 @@ After cloning the repo locally, install the necessary dependencies by running th
   npm install
   ```
   
-> [!TIP]
 > Built with Node v16.13.1 and npm v8.3.0
 
 ## Dependencies
