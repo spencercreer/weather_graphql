@@ -32,15 +32,17 @@ The following image demonstrates the application appearance:<br>
 ![Weather Dashboard animation](./public/weather_dashboard.PNG)
 
 ## Installation
-This application utilizes the following [dependencies](#dependencies):
+This application utilizes the following [dependencies](#dependencies).
 
-To install necessary dependencies, run the following command:
+After cloning the repo locally, install the necessary dependencies by running the following command:
 
   ```
   npm install
   ```
+<span style="color:green">Node v16.13.1 and npm v8.3.0</span>
  
 ## Dependencies
+
 This application utilizes the following dependencies:
 
 |Dependency        |Version    |
