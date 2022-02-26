@@ -39,8 +39,10 @@ After cloning the repo locally, install the necessary dependencies by running th
   ```
   npm install
   ```
-<span style="color:green">Node v16.13.1 and npm v8.3.0</span>
- 
+  
+> [!TIP]
+> Built with Node v16.13.1 and npm v8.3.0
+
 ## Dependencies
 
 This application utilizes the following dependencies:
