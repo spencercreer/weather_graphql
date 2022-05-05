@@ -6,7 +6,7 @@
 ![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)
 
 ## Description
-A React OpenWeather application.
+A React weather application that queries the OpenWeather API using GraphQL.
 
 This application retrieves weather data from the OpenWeather API and displays it to the user. It displays the current and 5-day forecasts for a searched city. The current forecast includes the current temperature, humidity, wind speed and UV index. The UV index indicates whether conditions are favorable, moderate, or severe.
 
@@ -39,8 +39,9 @@ After cloning the repo locally, install the necessary dependencies by running th
   ```
   npm install
   ```
-<span style="color:green">Node v16.13.1 and npm v8.3.0</span>
- 
+  
+> Built with Node v16.13.1 and npm v8.3.0
+
 ## Dependencies
 
 This application utilizes the following dependencies:
