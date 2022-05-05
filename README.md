@@ -29,7 +29,7 @@ Repository: [https://github.com/spencercreer/weather_graphql](https://github.com
 
 ## Animation
 The following image demonstrates the application appearance:<br>
-![Weather Dashboard animation](./public/weather_dashboard.PNG)
+![Weather Dashboard animation](./public/weather-dashboard.gif)
 
 ## Installation
 This application utilizes the following [dependencies](#dependencies).
@@ -49,6 +49,9 @@ This application utilizes the following dependencies:
 |------------------|-----------|
 |axios             |0.24.0     |
 |bootstrap         |5.1.3      |
+|express           |4.17.2     |
+|express-graphql   |0.12.0     |
+|graphql           |16.3.0     |
 |moment            |2.29.1     |
 |react             |17.0.2     |
 |react-bootstrap   |2.0.3      |
